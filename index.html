@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)file:///C:/Users/jeepc/Downloads/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Drowned Bell of Mirefall Lake</title>
+<link href="./index_files/css2" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1a0e05;
+  --ink-mid: #3a2010;
+  --parch: #f2e8d0;
+  --parch-dark: #e0cfa8;
+  --red: #8b1a00;
+  --gold: #b07820;
+  --shadow: rgba(0,0,0,0.65);
+}
+
+body {
+  background: #111;
+  font-family: 'Crimson Pro', Georgia, serif;
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* ══ NAV ══ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: #0a0705;
+  border-bottom: 1px solid #2a1a08;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 0;
+}
+.nav::-webkit-scrollbar { display: none; }
+
+.nav-title {
+  font-family: 'UnifrakturMaguntia', cursive;
+  color: #c8a060;
+  font-size: 1rem;
+  white-space: nowrap;
+  padding: 13px 14px 13px 0;
+  border-right: 1px solid #2a1a08;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.nav-section {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-right: 1px solid #1a1008;
+  padding-right: 2px;
+  margin-right: 2px;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: #7a5535;
+  font-family: 'IM Fell English', serif;
+  font-size: 0.78rem;
+  padding: 13px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.15s;
+  letter-spacing: 0.02em;
+}
+.nav-btn:hover { color: #c8a060; }
+.nav-btn.active { color: #e8c070; border-bottom: 2px solid #c8a060; }
+.nav-label {
+  font-family: 'IM Fell English SC', serif;
+  font-size: 0.58rem;
+  color: #4a3020;
+  letter-spacing: 0.15em;
+  padding: 0 6px;
+  align-self: center;
+}
+
+/* ══ SECTIONS ══ */
+.section-wrap {
+  display: none;
+  padding-top: 46px;
+  min-height: 100vh;
+}
+.section-wrap.active { display: block; }
+
+/* ══════════════════════════════════════
+   LANDING PAGE
+══════════════════════════════════════ */
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 46px);
+  padding: 40px 20px 60px;
+  text-align: center;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(42,80,80,0.15) 0%, transparent 70%);
+}
+
+.landing-bell {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  opacity: 0.7;
+  animation: sway 4s ease-in-out infinite;
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+
+.landing-title {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  color: #c8a060;
+  line-height: 1.15;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+}
+
+.landing-subtitle {
+  font-family: 'IM Fell English SC', serif;
+  font-size: 0.78rem;
+  color: #6a5030;
+  letter-spacing: 0.25em;
+  margin-bottom: 40px;
+}
+
+.landing-rule {
+  width: 120px;
+  border: none;
+  border-top: 1px solid #3a2a10;
+  margin: 0 auto 40px;
+}
+
+.landing-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  max-width: 680px;
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+.landing-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid #2a1a08;
+  padding: 24px 20px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  text-align: center;
+}
+.landing-card:hover {
+  background: rgba(200,160,96,0.08);
+  border-color: #5a3a14;
+}
+.landing-card-icon { font-size: 1.6rem; margin-bottom: 10px; opacity: 0.8; }
+.landing-card-title {
+  font-family: 'IM Fell English SC', serif;
+  font-size: 0.85rem;
+  color: #c8a060;
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+.landing-card-desc {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 0.78rem;
+  color: #5a4025;
+  line-height: 1.5;
+}
+
+.landing-footer {
+  font-family: 'IM Fell English SC', serif;
+  font-size: 0.62rem;
+  color: #3a2810;
+  letter-spacing: 0.2em;
+}
+
+/* ══════════════════════════════════════
+   DOCUMENTS (parchment handouts)
+══════════════════════════════════════ */
+.docs-wrap {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 60px;
+}
+
+.doc-subnav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 16px 16px 0;
+}
+.doc-tab {
+  background: none;
+  border: 1px solid #2a1a08;
+  color: #7a5535;
+  font-family: 'IM Fell English', serif;
+  font-size: 0.78rem;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.02em;
+}
+.doc-tab:hover { color: #c8a060; border-color: #5a3a14; }
+.doc-tab.active { color: #e8c070; border-color: #c8a060; background: rgba(200,160,96,0.08); }
+
+.doc-panel {
+  display: none;
+  width: 100%;
+  max-width: 680px;
+  padding: 24px 20px;
+}
+.doc-panel.active { display: block; }
+
+/* Parchment */
+.parchment {
+  position: relative;
+  background: #f0e6c8;
+  padding: 48px 52px;
+  box-shadow: inset 0 0 80px rgba(100,60,0,0.18), 0 4px 32px rgba(0,0,0,0.7);
+  overflow: hidden;
+}
+.parchment::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 20%, rgba(120,80,20,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 85% 80%, rgba(80,50,10,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.parchment::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(80,50,10,0.15) 0%, transparent 12%, transparent 88%, rgba(80,50,10,0.15) 100%),
+    linear-gradient(to bottom, rgba(80,50,10,0.15) 0%, transparent 12%, transparent 88%, rgba(80,50,10,0.15) 100%);
+  pointer-events: none;
+}
+.parchment.worn { background: #e8d8b0; transform: rotate(-0.4deg); }
+.parchment.official { background: #f4edd5; border: 1px solid #c8a96e; }
+.parchment.waterlogged { background: #ddd4b8; transform: rotate(0.3deg); filter: contrast(0.95); }
+.parchment.waterlogged::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 30%, rgba(60,80,100,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(80,100,120,0.10) 0%, transparent 70%);
+}
+
+.doc-seal { font-family: 'UnifrakturMaguntia', cursive; font-size: 1.05rem; color: #7a5020; text-align: center; letter-spacing: 0.08em; margin-bottom: 6px; position: relative; z-index: 1; }
+.doc-rule { border: none; border-top: 1px solid #a07840; margin: 10px 0 18px; opacity: 0.5; position: relative; z-index: 1; }
+.doc-rule.double { border-bottom: 1px solid #a07840; padding-bottom: 3px; }
+.doc-headline { font-family: 'IM Fell English SC', serif; font-size: 1.35rem; color: #3a1f00; text-align: center; line-height: 1.3; margin-bottom: 16px; position: relative; z-index: 1; }
+.doc-subhead { font-family: 'IM Fell English SC', serif; font-size: 0.8rem; color: #7a5020; text-align: center; letter-spacing: 0.12em; margin-bottom: 20px; position: relative; z-index: 1; }
+.doc-body { font-family: 'IM Fell English', serif; font-size: 0.97rem; line-height: 1.85; color: #2c1a06; position: relative; z-index: 1; }
+.doc-body p { margin-bottom: 1em; }
+.doc-body p:last-child { margin-bottom: 0; }
+.doc-body em { font-style: italic; color: #3d1f00; }
+.handwritten { font-family: 'IM Fell English', serif; font-style: italic; font-size: 1.0rem; line-height: 2.0; color: #1e1206; }
+.handwritten p { margin-bottom: 0.8em; }
+.scratched { font-family: 'IM Fell English', serif; font-style: italic; font-size: 0.92rem; line-height: 1.9; color: #2a1a08; }
+.doc-sig { margin-top: 28px; font-style: italic; text-align: right; color: #4a2800; font-size: 0.95rem; position: relative; z-index: 1; }
+.doc-sig .name { font-family: 'UnifrakturMaguntia', cursive; font-size: 1.2rem; display: block; margin-top: 4px; }
+.reward-amount { font-family: 'UnifrakturMaguntia', cursive; font-size: 2.4rem; color: #8b1a00; text-align: center; display: block; margin: 20px 0 8px; position: relative; z-index: 1; }
+.reward-label { text-align: center; font-family: 'IM Fell English SC', serif; font-size: 0.75rem; letter-spacing: 0.18em; color: #7a4010; margin-bottom: 20px; position: relative; z-index: 1; }
+.crossed { text-decoration: line-through; text-decoration-color: #1a0a00; text-decoration-thickness: 2px; }
+.faded { opacity: 0.45; }
+.ink-blot { display: inline-block; width: 18px; height: 8px; background: #1a0a00; border-radius: 50% 40% 60% 30%; vertical-align: middle; margin: 0 2px; opacity: 0.7; }
+.doc-label { font-family: 'IM Fell English SC', serif; font-size: 0.7rem; color: #6a5030; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; padding-left: 4px; }
+.dm-note { margin-top: 18px; background: rgba(0,0,0,0.35); border-left: 3px solid #c8a96e; padding: 12px 16px; border-radius: 0 4px 4px 0; }
+.dm-note-label { font-family: 'IM Fell English SC', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: #c8a96e; margin-bottom: 6px; }
+.dm-note p { font-family: 'IM Fell English', serif; font-size: 0.82rem; color: #b09060; line-height: 1.6; font-style: italic; }
+.record-table { width: 100%; border-collapse: collapse; margin: 16px 0; position: relative; z-index: 1; font-size: 0.88rem; }
+.record-table td { padding: 5px 8px; border-bottom: 1px solid rgba(120,80,20,0.2); vertical-align: top; line-height: 1.5; }
+.record-table td:first-child { font-family: 'IM Fell English SC', serif; font-size: 0.78rem; letter-spacing: 0.05em; color: #6a4010; width: 38%; }
+.ornament { text-align: center; color: #a07840; font-size: 1.1rem; margin: 16px 0 0; opacity: 0.5; position: relative; z-index: 1; letter-spacing: 0.3em; }
+
+/* ══════════════════════════════════════
+   CHARACTER SHEETS
+══════════════════════════════════════ */
+.sheets-wrap {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 60px;
+}
+
+.char-subnav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 16px 16px 0;
+}
+.char-tab {
+  background: none;
+  border: 1px solid #2a1a08;
+  color: #7a5535;
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.78rem;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.char-tab:hover { color: #c8a060; border-color: #5a3a14; }
+.char-tab.active { color: #e8c070; border-color: #c8a060; background: rgba(200,160,96,0.08); }
+
+.sheet-panel {
+  display: none;
+  width: 100%;
+  max-width: 720px;
+  padding: 24px 16px;
+}
+.sheet-panel.active { display: block; }
+
+/* Sheet card */
+.sheet {
+  background: var(--parch);
+  box-shadow: 0 4px 40px var(--shadow);
+  position: relative;
+  overflow: visible;
+}
+.sheet::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 40% at 10% 20%, rgba(120,80,20,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 90% 80%, rgba(80,50,10,0.07) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+.sheet-header { background: var(--ink); padding: 20px 28px 16px; position: relative; z-index: 1; }
+.char-title { font-family: 'IM Fell English', serif; font-size: 1.9rem; color: var(--parch); line-height: 1.1; margin-bottom: 3px; }
+.char-subtitle { font-family: 'Crimson Pro', serif; font-size: 1.0rem; color: #c8a060; font-style: italic; margin-bottom: 10px; }
+.char-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tag { font-family: 'Crimson Pro', serif; font-size: 0.72rem; letter-spacing: 0.08em; padding: 3px 10px; border: 1px solid rgba(200,160,96,0.4); color: #c8a060; border-radius: 2px; }
+
+.hook-banner { background: var(--red); padding: 8px 28px; font-family: 'IM Fell English', serif; font-style: italic; font-size: 0.9rem; color: var(--parch); position: relative; z-index: 1; }
+
+.sheet-body { padding: 24px 28px; position: relative; z-index: 1; }
+
+.section { margin-bottom: 18px; }
+.section-head { font-family: 'Crimson Pro', serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mid, #3a2010); border-bottom: 1px solid var(--rule, rgba(100,60,10,0.25)); padding-bottom: 4px; margin-bottom: 10px; }
+
+.abilities { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 20px; }
+.ability { background: var(--ink); color: var(--parch); text-align: center; padding: 10px 4px 8px; border-radius: 2px; }
+.ability-name { font-family: 'Crimson Pro', serif; font-size: 0.6rem; letter-spacing: 0.12em; color: #c8a060; display: block; margin-bottom: 4px; }
+.ability-score { font-family: 'IM Fell English', serif; font-size: 1.5rem; display: block; line-height: 1; color: var(--parch); }
+.ability-mod { font-family: 'Crimson Pro', serif; font-size: 0.75rem; color: #c8a060; display: block; margin-top: 2px; }
+
+.combat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+.combat-stat { background: var(--ink); color: var(--parch); text-align: center; padding: 10px 6px 8px; border-radius: 2px; }
+.combat-label { font-family: 'Crimson Pro', serif; font-size: 0.62rem; letter-spacing: 0.1em; color: #c8a060; display: block; margin-bottom: 4px; }
+.combat-val { font-family: 'IM Fell English', serif; font-size: 1.3rem; display: block; }
+
+.hp-tracker { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 18px; }
+.hp-label { font-family: 'Crimson Pro', serif; font-size: 0.6rem; letter-spacing: 0.1em; color: #6a4828; margin-bottom: 4px; }
+.hp-box { height: 32px; border: 1px solid rgba(100,60,10,0.3); border-radius: 2px; }
+.death-saves { }
+.death-label { font-family: 'Crimson Pro', serif; font-size: 0.6rem; letter-spacing: 0.1em; color: #6a4828; margin-bottom: 4px; }
+.death-row { font-family: 'Crimson Pro', serif; font-size: 0.72rem; display: flex; align-items: center; gap: 4px; margin-bottom: 2px; }
+.death-circle { display: inline-block; width: 12px; height: 12px; border: 1px solid rgba(100,60,10,0.4); border-radius: 50%; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+.skill-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+.skill-list li { font-family: 'Crimson Pro', serif; font-size: 0.88rem; line-height: 1.5; display: flex; align-items: center; gap: 6px; }
+.prof-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.bonus { font-weight: 600; min-width: 28px; color: var(--ink); }
+
+.trait { margin-bottom: 10px; }
+.trait-name { font-family: 'Crimson Pro', serif; font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+.trait-body { font-family: 'Crimson Pro', serif; font-size: 0.86rem; line-height: 1.55; color: #3a2010; margin-top: 2px; }
+
+.spell-slots { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
+.slot-group { background: var(--ink); padding: 6px 10px; border-radius: 2px; text-align: center; }
+.slot-level { font-family: 'Crimson Pro', serif; font-size: 0.6rem; letter-spacing: 0.1em; color: #c8a060; display: block; margin-bottom: 2px; }
+.slot-count { font-family: 'IM Fell English', serif; font-size: 1.1rem; color: var(--parch); display: block; }
+.spell-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+.spell-entry { font-family: 'Crimson Pro', serif; font-size: 0.86rem; line-height: 1.6; color: #2c1a06; }
+.spell-entry em { font-style: italic; font-size: 0.78rem; color: #6a4828; }
+
+.equipment-list { list-style: none; columns: 2; gap: 16px; font-family: 'Crimson Pro', serif; font-size: 0.88rem; line-height: 1.7; color: #2c1a06; }
+.equipment-list li::before { content: '· '; color: #b07820; }
+
+.backstory { font-family: 'Crimson Pro', serif; font-size: 0.9rem; line-height: 1.7; color: #2c1a06; margin-bottom: 14px; }
+.personality-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.personality-box { background: var(--parch-dark, #e0cfa8); padding: 10px 12px; }
+.personality-label { font-family: 'Crimson Pro', serif; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; color: #6a4828; display: block; margin-bottom: 4px; }
+.personality-text { font-family: 'Crimson Pro', serif; font-size: 0.85rem; line-height: 1.5; color: #2c1a06; }
+
+/* ── Secret page (screen hidden, print shown) ── */
+.secret-page { display: none; }
+
+.secret-box { background: var(--ink); padding: 14px 16px; margin-top: 18px; }
+.secret-label { font-family: 'Crimson Pro', serif; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; color: #c8a060; display: block; margin-bottom: 6px; }
+.secret-text { font-family: 'Crimson Pro', serif; font-size: 0.92rem; line-height: 1.7; color: var(--parch); }
+
+/* ══════════════════════════════════════
+   SECRETS (fold-and-hand cards)
+══════════════════════════════════════ */
+.secrets-inner {
+  padding: 32px 20px 60px;
+}
+.secrets-title { font-family: 'UnifrakturMaguntia', cursive; color: #c8a96e; font-size: 1.4rem; text-align: center; margin-bottom: 6px; }
+.secrets-sub { font-family: 'IM Fell English SC', serif; font-size: 0.68rem; color: #6a5030; text-align: center; letter-spacing: 0.2em; margin-bottom: 32px; }
+.notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+.note { position: relative; }
+.note-outside { background: #e8d8b0; border-bottom: 2px dashed #a07840; padding: 14px 20px; text-align: center; position: relative; box-shadow: 0 2px 12px rgba(0,0,0,0.5); }
+.note-outside::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 20% 30%, rgba(120,80,20,0.10) 0%, transparent 70%); pointer-events: none; }
+.fold-label { font-family: 'IM Fell English SC', serif; font-size: 0.62rem; color: #8a6030; letter-spacing: 0.2em; margin-bottom: 4px; position: relative; z-index: 1; }
+.char-name-label { font-family: 'UnifrakturMaguntia', cursive; font-size: 1.5rem; color: #3a1f00; position: relative; z-index: 1; line-height: 1.2; }
+.char-class-label { font-family: 'IM Fell English', serif; font-style: italic; font-size: 0.78rem; color: #6a4010; margin-top: 2px; position: relative; z-index: 1; }
+.fold-indicator { font-family: 'IM Fell English SC', serif; font-size: 0.58rem; color: #a07840; letter-spacing: 0.15em; margin-top: 8px; opacity: 0.7; position: relative; z-index: 1; }
+.note-inside { background: #f0e6c8; padding: 22px 24px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.6); position: relative; overflow: hidden; }
+.note-inside::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 40% at 80% 20%, rgba(120,80,20,0.12) 0%, transparent 70%); pointer-events: none; }
+.secret-header { font-family: 'IM Fell English SC', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: #8b1a00; margin-bottom: 10px; position: relative; z-index: 1; }
+.secret-rule { border: none; border-top: 1px solid rgba(140,90,20,0.3); margin: 0 0 14px; position: relative; z-index: 1; }
+.secret-text-card { font-family: 'IM Fell English', serif; font-style: italic; font-size: 0.95rem; line-height: 1.85; color: #1e1206; position: relative; z-index: 1; }
+.secret-text-card p { margin-bottom: 0.7em; }
+.secret-text-card p:last-child { margin-bottom: 0; }
+.secret-text-card em { font-style: normal; font-weight: bold; color: #3a1000; }
+.secret-prompt { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(140,90,20,0.25); font-family: 'IM Fell English SC', serif; font-size: 0.7rem; color: #6a3010; letter-spacing: 0.05em; line-height: 1.5; position: relative; z-index: 1; }
+.secret-prompt span { font-family: 'IM Fell English', serif; font-style: italic; font-size: 0.82rem; letter-spacing: 0; color: #4a2000; display: block; margin-top: 4px; }
+.note-sigil { font-size: 1.1rem; margin-right: 6px; vertical-align: middle; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 500px) {
+  .abilities { grid-template-columns: repeat(3, 1fr); }
+  .combat-row { grid-template-columns: repeat(2, 1fr); }
+  .two-col { grid-template-columns: 1fr; }
+  .personality-grid { grid-template-columns: 1fr; }
+  .spell-grid { grid-template-columns: 1fr; }
+  .equipment-list { columns: 1; }
+  .sheet-body { padding: 18px 16px; }
+  .parchment { padding: 32px 24px; }
+  .landing-cards { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════
+   PRINT
+══════════════════════════════════════ */
+@media print {
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: none !important; font-size: 10pt; }
+  .nav, .char-subnav, .doc-subnav { display: none !important; }
+  .section-wrap { display: block !important; padding-top: 0 !important; }
+  .landing { display: none !important; }
+
+  /* — Documents — */
+  .docs-wrap { display: block !important; }
+  .doc-panel {
+    display: block !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    page-break-after: always;
+    break-after: page;
+  }
+  .doc-panel:last-child { page-break-after: avoid; break-after: avoid; }
+  .parchment { background: none !important; box-shadow: none !important; filter: none !important; transform: none !important; border: none !important; }
+  .parchment.official { border: 1px solid #8a6030 !important; }
+  .parchment::before, .parchment::after { display: none !important; }
+  .doc-label, .dm-note { display: none !important; }
+
+  /* — Character sheets — */
+  .sheets-wrap { display: block !important; }
+  .sheet-panel {
+    display: block !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .sheet {
+    box-shadow: none !important;
+    overflow: visible !important;
+    position: static !important;
+    break-after: page;
+    page-break-after: always;
+  }
+  .sheet::before { display: none !important; content: none !important; }
+  .sheet-header { position: static !important; padding: 12px 20px 10px !important; }
+  .sheet-body { position: static !important; padding: 12px 20px !important; }
+
+  /* Secret page */
+  .secret-page {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--ink) !important;
+    break-after: page;
+    page-break-after: always;
+  }
+  .sheet-panel:last-child .secret-page { break-after: avoid; page-break-after: avoid; }
+
+  /* Compact print typography */
+  .char-title { font-size: 1.5rem !important; }
+  .char-subtitle { font-size: 0.85rem !important; margin-bottom: 5px !important; }
+  .char-tags { margin-top: 4px !important; gap: 4px !important; }
+  .hook-banner { padding: 5px 20px !important; font-size: 0.82rem !important; }
+  .section { margin-bottom: 8px !important; }
+  .section-head { font-size: 0.6rem !important; margin-bottom: 5px !important; padding-bottom: 2px !important; }
+  .abilities { gap: 4px !important; margin-bottom: 8px !important; }
+  .ability { padding: 6px 4px 5px !important; }
+  .ability-score { font-size: 1.2rem !important; }
+  .ability-mod { font-size: 0.68rem !important; }
+  .combat-row { gap: 4px !important; margin-bottom: 6px !important; }
+  .combat-stat { padding: 6px 4px !important; }
+  .combat-val { font-size: 1.1rem !important; }
+  .hp-tracker { display: none !important; }
+  .two-col { gap: 12px !important; }
+  .skill-list { gap: 0 !important; }
+  .skill-list li { font-size: 0.8rem !important; line-height: 1.4 !important; }
+  .trait { margin-bottom: 4px !important; }
+  .trait-name { font-size: 0.82rem !important; }
+  .trait-body { font-size: 0.78rem !important; line-height: 1.3 !important; margin-top: 1px !important; }
+  .spell-slots { gap: 4px 10px !important; margin-bottom: 5px !important; }
+  .spell-grid { gap: 1px 10px !important; }
+  .spell-entry { font-size: 0.76rem !important; line-height: 1.3 !important; }
+  .equipment-list { columns: 2 !important; gap: 10px !important; font-size: 0.78rem !important; line-height: 1.35 !important; }
+  .backstory-section { display: none !important; }
+  .personality-grid { display: none !important; }
+  .secret-box { margin: 0 !important; padding: 40px 48px !important; width: 100%; }
+  .secret-label { font-size: 0.7rem !important; margin-bottom: 14px !important; }
+  .secret-text { font-size: 1.05rem !important; line-height: 1.75 !important; }
+
+  /* Ink saver */
+  .sheet, .sheet-body, .sheet-header { background: #fff !important; }
+  .ability { background: #fff !important; border: 1px solid #999 !important; color: #000 !important; }
+  .ability-name, .ability-mod { color: #444 !important; }
+  .ability-score { color: #000 !important; }
+  .combat-stat { background: #fff !important; border: 1px solid #999 !important; }
+  .combat-label { color: #444 !important; }
+  .combat-val { color: #000 !important; }
+  .sheet-header { background: #fff !important; border-bottom: 2px solid #000 !important; }
+  .char-title { color: #000 !important; }
+  .char-subtitle { color: #444 !important; }
+  .tag { color: #333 !important; border-color: #666 !important; }
+  .hook-banner { background: #fff !important; color: #333 !important; border-left: 3px solid #999 !important; border-top: none !important; border-bottom: none !important; }
+  .section-head { color: #000 !important; border-bottom-color: #999 !important; }
+  .prof-dot { background: #333 !important; }
+  .slot-group { background: #fff !important; border: 1px solid #999 !important; }
+  .slot-level { color: #444 !important; }
+  .slot-count { color: #000 !important; }
+  .secret-page { background: #fff !important; min-height: auto !important; }
+  .secret-box { background: #111 !important; }
+  .secret-label { color: #c8a060 !important; }
+  .secret-text { color: #f2e8d0 !important; }
+
+  /* — Secrets cards — */
+  .secrets-inner { padding: 0; }
+  .secrets-title, .secrets-sub { display: none; }
+  .notes-grid { display: block; max-width: 100%; }
+  .note { page-break-inside: avoid; break-inside: avoid; page-break-after: always; break-after: page; max-width: 480px; margin: 0 auto; }
+  .note:last-child { page-break-after: avoid; break-after: avoid; }
+  .note-outside { background: none !important; box-shadow: none !important; border-bottom: 2px dashed #8a6030; }
+  .note-outside::before { display: none; }
+  .note-inside { background: none !important; box-shadow: none !important; }
+  .note-inside::before { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="nav-title">☩ Mirefall</div>
+  <button class="nav-btn active" data-section="home">Home</button>
+  <button class="nav-btn" data-section="docs">Handouts</button>
+  <button class="nav-btn" data-section="sheets">Characters</button>
+  <button class="nav-btn" data-section="secrets">Secrets</button>
+</nav>
+
+<!-- ══════════════════════════════════════
+     LANDING
+══════════════════════════════════════ -->
+<div class="section-wrap active" id="section-home">
+  <div class="landing">
+    <div class="landing-bell">☩</div>
+    <div class="landing-title">The Drowned Bell<br>of Mirefall Lake</div>
+    <div class="landing-subtitle">A D&amp;D 5e One-Shot · Levels 4–6 · 6–8 Players</div>
+    <hr class="landing-rule">
+    <div class="landing-cards">
+      <div class="landing-card" onclick="switchSection(&#39;docs&#39;)">
+        <div class="landing-card-icon">📜</div>
+        <div class="landing-card-title">Handouts</div>
+        <div class="landing-card-desc">In-world documents — notices, logs, letters, and records for players to discover</div>
+      </div>
+      <div class="landing-card" onclick="switchSection(&#39;sheets&#39;)">
+        <div class="landing-card-icon">⚔️</div>
+        <div class="landing-card-title">Character Sheets</div>
+        <div class="landing-card-desc">Eight pre-made characters with full stat blocks, backstories, and connections</div>
+      </div>
+      <div class="landing-card" onclick="switchSection(&#39;secrets&#39;)">
+        <div class="landing-card-icon">🔒</div>
+        <div class="landing-card-title">Player Secrets</div>
+        <div class="landing-card-desc">Fold-and-hand secret notes — print, cut, and give to each player privately</div>
+      </div>
+    </div>
+    <div class="landing-footer">Camping DND One-Shot · Created with care · Print any section from its tab</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     HANDOUTS
+══════════════════════════════════════ -->
+<div class="section-wrap" id="section-docs">
+  <div class="char-subnav doc-subnav">
+    <button class="doc-tab" data-doc="0">Notice</button>
+    <button class="doc-tab" data-doc="1">Church Log</button>
+    <button class="doc-tab" data-doc="2">Marta's Letter</button>
+    <button class="doc-tab" data-doc="3">Deed Dispute</button>
+    <button class="doc-tab active" data-doc="4">Fisherman's Note</button>
+    <button class="doc-tab" data-doc="5">Voss — Page 2</button>
+  </div>
+  <div class="docs-wrap">
+
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- DOC 1 — VILLAGE NOTICE -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="doc-panel" id="doc-0" style="display: none;">
+    <div class="doc-label">Found: posted at the crossroads &amp; the Drowned Lantern</div>
+    <div class="parchment official">
+      <div class="doc-seal">☩ Village of Mirefall ☩</div>
+      <hr class="doc-rule double">
+      <div class="doc-headline">Notice of Disturbance &amp; Reward</div>
+      <div class="doc-subhead">By Order of the Village Elder — This Fourteenth Day of Harvestmoon</div>
+      <hr class="doc-rule">
+
+      <div class="doc-body">
+        <p>Let it be known to all travelers and persons of sound character:</p>
+
+        <p>The village of Mirefall is visited by an affliction of <em>unnatural origin</em>. For nine days and nine nights without interruption, a tolling has risen from the depths of our lake — steady, low, and without ceasing. It is heard in sleep. It is felt in the chest. Our fishermen will not put boats out. Our children will not near the shore. Two men who ventured onto the water seven days past have not returned.</p>
+
+        <span class="reward-amount">50 Gold</span>
+        <div class="reward-label">Reward — Coin of the Realm</div>
+
+        <p>…is offered to any party willing to investigate the source of this disturbance and bring it to an end by whatever means prove necessary. Payment rendered in full upon resolution, to be witnessed by the Elder.</p>
+
+        <p>Inquire at the Elder's cottage on the north end of the village road. Ask for <em>Marta.</em></p>
+
+        <p style="font-size:0.82rem; opacity:0.7; margin-top:18px;">All those who enter upon the lake do so of their own accord. The village of Mirefall accepts no responsibility for misfortune sustained thereon.</p>
+      </div>
+
+      <hr class="doc-rule" style="margin-top:24px;">
+      <div class="doc-sig">
+        By my hand and seal,
+        <span class="name">Marta Voss</span>
+        Village Elder, Mirefall
+      </div>
+      <div class="ornament">— ✦ —</div>
+    </div>
+    <div class="dm-note">
+      <div class="dm-note-label">DM Note</div>
+      <p>This is what drew the party to Mirefall. Marta wrote it in desperation — she knows exactly why the bell is ringing and has for her entire life. The disclaimer at the bottom was added by her hands shaking.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- DOC 2 — CHURCH LOG -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="doc-panel" id="doc-1" style="display: none;">
+    <div class="doc-label">Found: in the submerged chapel, Act 2 — Investigation DC 14</div>
+    <div class="parchment waterlogged">
+      <div class="doc-seal">Chapel of the Drowned Light — Parish Record</div>
+      <hr class="doc-rule">
+      <div class="doc-headline" style="font-size:1.1rem;">Logbook of Father Aldric Voss</div>
+      <div class="doc-subhead">Recovered — water-damaged — pages fused beyond the third entry</div>
+      <hr class="doc-rule">
+
+      <div class="doc-body">
+        <table class="record-table">
+          <tbody><tr>
+            <td>3rd Harvestmoon</td>
+            <td>Rain through the night. The Callowell family has sent word they will not attend services until the matter of the orchard boundary is settled by the Elder. I have written to the council. God grant patience.</td>
+          </tr>
+          <tr>
+            <td>7th Harvestmoon</td>
+            <td>The dispute has spread. Four families now, perhaps five. They say the church claims land that was their fathers'. I say the church claims nothing — I only record what the old deeds say. I am tired of being made the villain of a story I did not write.</td>
+          </tr>
+          <tr>
+            <td>11th Harvestmoon</td>
+            <td>I climbed to the ridge this morning and saw the upstream dam is <em>badly swollen.</em> I have sent word to the council. No reply as yet. If it breaks before they act, God help anyone in the valley.</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="faded">14th Harve</span><span style="opacity:0.15">stmoon</span>
+            </td>
+            <td class="scratched faded">
+              The water is coming. I can hear it above the wind. I have rung the bell — I am still ringing — why has no one come to <span class="faded">warn me — I can see the families on the hi</span><span style="opacity:0.1">ll — they are watching — they are not —</span>
+            </td>
+          </tr>
+        </tbody></table>
+
+        <p style="margin-top: 20px; font-size:0.82rem; font-style:italic; opacity:0.6; text-align:center;">— remaining pages unrecoverable —</p>
+      </div>
+
+      <div class="ornament">☩</div>
+    </div>
+    <div class="dm-note">
+      <div class="dm-note-label">DM Note</div>
+      <p>The last entry is the key reveal. Players who succeed on a DC 14 Investigation or Perception check while reading notice that the ink on the final line is <em>not</em> water-damaged — it was deliberately scratched out, post-flood, by someone who wanted this page unreadable. It wasn't the water that erased it.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- DOC 3 — MARTA'S LETTER -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="doc-panel" id="doc-2" style="display: none;">
+    <div class="doc-label">Found: hidden beneath the floorboard in Marta's cottage — Investigation DC 15</div>
+    <div class="parchment worn">
+      <div class="doc-headline" style="font-size:1.05rem; text-align:left; margin-bottom:20px;">
+        To Whoever Comes After Me —
+      </div>
+
+      <div class="handwritten doc-body">
+        <p>I have kept this secret for sixty-one years. I learned it from my mother, who learned it from hers, who was a girl of eight when the flood came and saw everything from the hillside.</p>
+
+        <p>Father Voss rang the chapel bell to warn the village. He had seen the dam failing and ran to the church. He rang for an hour before the water took him.</p>
+
+        <p>The Callowell family knew. The Brennish family knew. The <span class="crossed">Vorne</span> <span class="crossed">Ashvale</span> — four families knew the dam had broken and chose not to send word to the chapel because they were <em>feuding with him over land.</em> They watched from high ground. They watched him ring until he drowned.</p>
+
+        <p>Afterward they told the village the bell had rung on its own. A miracle, they said. A warning from God. And everyone chose to believe them because the alternative was too terrible.</p>
+
+        <p>My great-grandfather died ringing a bell to save people who let him drown for spite.</p>
+
+        <p>I have not told anyone. I do not know how to tell anyone. I am writing this down because the bell has started again and I think — I think he knows I know. I think he has always known.</p>
+
+        <p>If someone finds this: <em>his name was Aldric. He was trying to save them. Please let him rest.</em></p>
+      </div>
+
+      <div class="doc-sig" style="margin-top:20px;">
+        — <em>Marta Voss, Elder of Mirefall</em>
+        <span style="display:block; font-size:0.8rem; margin-top:6px; opacity:0.7;">written in the ninth year of my eldership</span>
+      </div>
+    </div>
+    <div class="dm-note">
+      <div class="dm-note-label">DM Note</div>
+      <p>This is the heart of the mystery. Marta will not volunteer this information — she has carried the guilt of silence her whole life. If players find the letter first, she breaks down completely when confronted. The crossed-out family names are <em>intentional</em>: she started to write them and couldn't. A DC 12 Investigation can partially make out "Vorne" — one of the PC surnames if Thessaly is in the party.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- DOC 4 — DEED DISPUTE -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="doc-panel" id="doc-3" style="display: none;">
+    <div class="doc-label">Found: in the village records box at the Elder's cottage — freely accessible</div>
+    <div class="parchment official">
+      <div class="doc-seal">☩ Office of the Village Council — Mirefall ☩</div>
+      <hr class="doc-rule double">
+      <div class="doc-headline">Memorandum of Land Dispute</div>
+      <div class="doc-subhead">Regarding the Eastern Orchard Boundary — Filed 2nd Harvestmoon</div>
+      <hr class="doc-rule">
+
+      <div class="doc-body">
+        <p>The following families have filed formal objection to the boundary survey conducted by the Chapel of the Drowned Light, asserting that approximately <em>four acres of eastern orchard land</em> recorded in the chapel's name were improperly transferred in the year of the founding, without consent of the original farming families:</p>
+
+        <table class="record-table" style="margin: 16px 0;">
+          <tbody><tr><td>Petitioner 1</td><td>House Callowell — orchard &amp; northern field</td></tr>
+          <tr><td>Petitioner 2</td><td>House Brennish — eastern lower pasture</td></tr>
+          <tr><td>Petitioner 3</td><td>House Drave — disputed access road</td></tr>
+          <tr><td>Petitioner 4</td><td>House Vorne — southern quarter-acre, mill rights</td></tr>
+          <tr><td>Petitioner 5</td><td>House Ashvale — <span class="crossed">retracted 8th Harvestmoon</span></td></tr>
+          <tr><td>Petitioner 6</td><td>House <span class="ink-blot"></span> — <span class="faded">retracted prior to filing</span></td></tr>
+        </tbody></table>
+
+        <p>The matter was submitted to Father Aldric Voss for response. His reply, received 9th Harvestmoon, stated that the boundary records were accurate and that he would <em>"make no concession on land that belongs to God's house."</em></p>
+
+        <p>Resolution of this dispute is pending council review, scheduled for the <span class="crossed">16th</span> <span class="faded">— never convened.</span></p>
+      </div>
+
+      <hr class="doc-rule" style="margin-top: 20px;">
+      <p style="font-size:0.78rem; font-style:italic; opacity:0.6; text-align:center; position:relative; z-index:1;">Council seal affixed. Filed in perpetuity.</p>
+      <div class="ornament">— ✦ —</div>
+    </div>
+    <div class="dm-note">
+      <div class="dm-note-label">DM Note</div>
+      <p>This document establishes motive. Note the sixth petitioner is blotted out — that family quietly withdrew and then, separately, warned the village during the flood while the others did not. The Ashvale retraction is also notable: House Ashvale stepped back from the feud just before the flood. If Oryn Ashvale is in the party, this lands hard.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- DOC 5 — FISHERMAN'S NOTE -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="doc-panel active" id="doc-4" style="display: block;">
+    <div class="doc-label">Found: wedged under the seat of the docked fishing boat — freely accessible</div>
+    <div class="parchment worn" style="transform: rotate(0.8deg);">
+      <div class="doc-headline" style="font-size:0.95rem; text-align:left; margin-bottom:16px; opacity:0.8;">
+        [no salutation — torn from a larger sheet]
+      </div>
+
+      <div class="scratched doc-body">
+        <p>— went out at first light. Bell is louder on the water. Dren says it's coming from below the old chapel site. I believe him now.</p>
+
+        <p>We rowed out to where the steeple used to break the surface before the silt covered it. You can't see it anymore. But you can <em>feel</em> the pull there — like something beneath turning in a slow circle, drawing the current toward it.</p>
+
+        <p>Dren put his hand in the water. Said it felt warm. I did not put my hand in the water.</p>
+
+        <p>We heard it then. Not just the bell. Something else underneath it. Like a voice trying to speak through water, or a word being said over and over so slowly you can't make it out. Dren thinks it's a name. I think it's an accusation.</p>
+
+        <p>If we don't come back tell <span class="crossed">Sael</span> I'm sorry about the boat. Tell her I loved her more than I was good at showing. Tell her the lake is not —</p>
+      </div>
+
+      <p style="font-size:0.82rem; font-style:italic; opacity:0.45; margin-top:16px; position:relative; z-index:1; text-align:center;">— note ends here —</p>
+
+      <div class="ornament" style="margin-top:12px;">☩</div>
+    </div>
+    <div class="dm-note">
+      <div class="dm-note-label">DM Note</div>
+      <p>The two fishermen (Corvin and Dren) are still alive — barely — in the submerged chapel, kept in a trance state by Voss's presence. Rescuing them is a potential Act 2 objective and earns the party goodwill and more information. The incomplete final line is intentional: read it aloud to the players exactly as written and let it hang.</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- DOC 6 — FATHER VOSS JOURNAL PAGE 2 -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="doc-panel" id="doc-5" style="display: none;">
+    <div class="doc-label">Found: wedged beneath the altar stone in the sunken chapel — Act 2</div>
+    <div class="parchment waterlogged" style="transform: rotate(0deg);">
+      <div class="doc-seal">Chapel of the Drowned Light — Parish Record</div>
+      <hr class="doc-rule">
+      <div class="doc-headline" style="font-size:1.0rem;">Logbook of Father Aldric Voss — continued</div>
+      <hr class="doc-rule">
+
+      <div class="doc-body">
+        <table class="record-table">
+          <tbody><tr>
+            <td style="vertical-align:top;">
+              <span style="opacity:0.8;">14th Harvestmoon</span><br>
+              <span style="opacity:0.55; font-size:0.7rem; font-style:italic;">continued</span>
+            </td>
+            <td style="line-height:1.85;">
+              <span style="opacity:1.0;">— they are watching from the hill and they are <span class="crossed">not coming</span>. I can see the Callowell boy. He sees me. He is not moving.</span>
+              <br><br>
+              <span style="opacity:0.82;">The water is at the door. I have climbed to the bell platform. I am still ringing. I do not know what else to do. I was told this bell calls the faithful home — </span><span style="opacity:0.65;">I am ringing it I am ringing it I am ringing it —</span>
+            </td>
+          </tr>
+        </tbody></table>
+
+        <div style="margin-top:22px;">
+          <div style="font-family:&#39;IM Fell English SC&#39;, serif; font-size:0.78rem; color:#4a2808; margin-bottom:10px; opacity:0.88;">
+            14th Harvestmoon — <span style="font-size:0.7rem; font-style:italic; opacity:0.75;">later. much later. water at my knees.</span>
+          </div>
+          <div class="scratched" style="line-height:2.0;">
+            <span style="opacity:1.0;">I forgive the land dispute. I forgive the unkind words. I do not understand why no one has come.</span>
+            <br><br>
+            <span style="opacity:0.82;">I have been ringing for — I do not know how long. My hands are numb. The rope is </span><span style="opacity:0.80; filter:blur(0.4px);">slipping.</span>
+            <br><br>
+            <span style="opacity:0.68;">If someone finds this — the dam above Callowfield is broken. Send word to the villages downstream. Tell them </span><span style="opacity:0.52;">the chapel tried</span><span style="opacity:0.68;">.</span>
+            <br><br>
+            <span style="opacity:0.52;">I am going to keep ringing until</span>
+            <br><br>
+            <span style="opacity:0.38;">God forgive them. God forgive them. God forgive them. God forgive</span>
+            <span style="opacity:0.28;"> them. God fo</span><span style="opacity:0.16;">rg</span>
+          </div>
+        </div>
+
+        <p style="margin-top:28px; text-align:center; opacity:0.35; font-size:0.8rem; font-style:italic;">— remainder of page submerged —</p>
+      </div>
+
+      <div class="ornament">— ☩ —</div>
+    </div>
+    <div class="dm-note">
+      <div class="dm-note-label">DM Note</div>
+      <p>Hand this to the party after they descend into the chapel in Act 2 — ideally right before or after they encounter Voss directly. The repeated "God forgive them" trailing off is intentional — read it aloud slowly. If Thessaly Vorne is in the party, the line "I forgive the land dispute" lands especially hard. The damage increases as you read down, matching the rising water level.</p>
+    </div>
+  </div>
+
+  </div><!-- /docs-wrap -->
+</div><!-- /section-docs -->
+
+<!-- ══════════════════════════════════════
+     CHARACTER SHEETS
+══════════════════════════════════════ -->
+<div class="section-wrap" id="section-sheets">
+  <div class="char-subnav">
+    <button class="char-tab active" data-char="0">Oryn</button>
+    <button class="char-tab" data-char="1">Vesper</button>
+    <button class="char-tab" data-char="2">Sable</button>
+    <button class="char-tab" data-char="3">Thessaly</button>
+    <button class="char-tab" data-char="4">Ash</button>
+    <button class="char-tab" data-char="5">Br. Mael</button>
+    <button class="char-tab" data-char="6">Isolde</button>
+    <button class="char-tab" data-char="7">Calder</button>
+  </div>
+  <div class="sheets-wrap">
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 1. ORYN ASHVALE — Grave Cleric -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sheet-panel active" id="panel-0" style="display: block;">
+<div class="sheet">
+  <div class="sheet-header">
+    <div class="char-title">Oryn Ashvale</div>
+    <div class="char-subtitle">Cleric of the Grave · Half-Elf · Level 4</div>
+    <div class="char-tags">
+      <span class="tag">NEUTRAL GOOD</span>
+      <span class="tag">PROF BONUS +2</span>
+      <span class="tag">SPELLCASTER</span>
+      <span class="tag">SUPPORT</span>
+    </div>
+  </div>
+  <div class="hook-banner">"The dead deserve peace. So do the living. I am here for both."</div>
+  <div class="sheet-body">
+
+    <div class="section">
+      <div class="section-head">ABILITY SCORES</div>
+      <div class="abilities">
+        <div class="ability"><span class="ability-name">STR</span><span class="ability-score">10</span><span class="ability-mod">+0</span></div>
+        <div class="ability"><span class="ability-name">DEX</span><span class="ability-score">12</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">CON</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+        <div class="ability"><span class="ability-name">INT</span><span class="ability-score">13</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">WIS</span><span class="ability-score">17</span><span class="ability-mod">+3</span></div>
+        <div class="ability"><span class="ability-name">CHA</span><span class="ability-score">12</span><span class="ability-mod">+1</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">COMBAT</div>
+      <div class="combat-row">
+        <div class="combat-stat"><span class="combat-label">ARMOR CLASS</span><span class="combat-val">16</span></div>
+        <div class="combat-stat"><span class="combat-label">HIT POINTS</span><span class="combat-val">28</span></div>
+        <div class="combat-stat"><span class="combat-label">SPEED</span><span class="combat-val">30 ft</span></div>
+        <div class="combat-stat"><span class="combat-label">INITIATIVE</span><span class="combat-val">+1</span></div>
+      </div>
+      <div class="hp-tracker">
+        <div><div class="hp-label">CURRENT HP</div><div class="hp-box"></div></div>
+        <div><div class="hp-label">TEMP HP</div><div class="hp-box"></div></div>
+        <div class="death-saves">
+          <div class="death-label">DEATH SAVES</div>
+          <div class="death-row">Successes <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+          <div class="death-row">Failures <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-head">SAVING THROWS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+5</span> Wisdom</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Charisma</li>
+          <li><span class="bonus">+0</span> Strength</li>
+          <li><span class="bonus">+1</span> Dexterity</li>
+          <li><span class="bonus">+2</span> Constitution</li>
+          <li><span class="bonus">+1</span> Intelligence</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-head">SKILLS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+5</span> Insight</li>
+          <li><span class="prof-dot"></span><span class="bonus">+5</span> Medicine</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> History</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Religion</li>
+          <li><span class="bonus">+1</span> Perception</li>
+          <li><span class="bonus">+1</span> Persuasion</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">CLASS FEATURES</div>
+      <div class="trait">
+        <div class="trait-name">Circle of Mortality</div>
+        <div class="trait-body">Spare the Dying as a bonus action at 30 ft. Healing Word heals maximum HP when target is at 0 HP.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Eyes of the Grave</div>
+        <div class="trait-body">Detect undead within 60 ft. up to 3 times per long rest (WIS mod). No action required.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Channel Divinity: Path to the Grave</div>
+        <div class="trait-body">As an action, curse one creature. The next hit against it deals double damage. 1/short rest.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Darkvision · Fey Ancestry</div>
+        <div class="trait-body">See 60 ft. in darkness. Advantage on saving throws against being charmed; magic can't put you to sleep.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">SPELLCASTING — Save DC 13 · Attack +5</div>
+      <div class="spell-slots">
+        <div class="slot-group"><span class="slot-level">CANTRIPS</span><span class="combat-val" style="font-size:1rem;">∞</span></div>
+        <div class="slot-group"><span class="slot-level">1ST LEVEL</span><span class="slot-count">4</span></div>
+        <div class="slot-group"><span class="slot-level">2ND LEVEL</span><span class="slot-count">3</span></div>
+      </div>
+      <div class="spell-grid">
+        <div class="spell-entry">Toll the Dead <em>cantrip</em></div>
+        <div class="spell-entry">Spare the Dying <em>cantrip</em></div>
+        <div class="spell-entry">Cure Wounds <em>1st · domain</em></div>
+        <div class="spell-entry">Bane <em>1st · domain</em></div>
+        <div class="spell-entry">False Life <em>1st · domain</em></div>
+        <div class="spell-entry">Inflict Wounds <em>1st</em></div>
+        <div class="spell-entry">Healing Word <em>1st</em></div>
+        <div class="spell-entry">Guiding Bolt <em>1st</em></div>
+        <div class="spell-entry">Gentle Repose <em>2nd · domain</em></div>
+        <div class="spell-entry">Speak with Dead <em>2nd · domain</em></div>
+        <div class="spell-entry">Spiritual Weapon <em>2nd</em></div>
+        <div class="spell-entry">Hold Person <em>2nd</em></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">EQUIPMENT</div>
+      <ul class="equipment-list">
+        <li>Chain mail (AC 16)</li>
+        <li>Shield (+2 AC)</li>
+        <li>Mace (+2 to hit, 1d6 bludgeoning)</li>
+        <li>Holy symbol (worn)</li>
+        <li>Healer's kit (10 uses)</li>
+        <li>Herbalism kit</li>
+        <li>50 ft. rope</li>
+        <li>Backpack, rations (5 days)</li>
+        <li>15 gp</li>
+      </ul>
+    </div>
+
+    <div class="section backstory-section">
+      <div class="section-head">BACKSTORY</div>
+      <div class="backstory">
+        Oryn grew up in a family that never spoke of the past. Their grandmother, a sharp-eyed woman named Hessa, spent her final years sleeping restlessly and waking from dreams she refused to describe. She died with an expression that Oryn could only call guilt. When Oryn entered the clergy of the Grave domain — drawn to the idea that the dead deserve honesty even when the living won't provide it — they began researching their family line. The trail led to a village called Mirefall and a land dispute involving a priest named Aldric Voss. What Oryn found in the church records made them feel sick: House Ashvale had watched a man drown from a hillside and said nothing. Oryn came to Mirefall with no plan except to find out if there is any way to make something like that right — and whether forgiveness can be offered on behalf of people who never asked for it.
+      </div>
+      <div class="personality-grid">
+        <div class="personality-box">
+          <span class="personality-label">PERSONALITY</span>
+          <div class="personality-text">Quiet and precise. Listens more than speaks. Uncomfortable with dishonesty, even social dishonesty.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">IDEAL</span>
+          <div class="personality-text">The dead are owed the truth. Covering up how someone died is a second death.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">BOND</span>
+          <div class="personality-text">My grandmother carried this secret to her grave. I am here because she couldn't come herself.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">FLAW</span>
+          <div class="personality-text">I sometimes care more about the dead than the living standing right in front of me.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="secret-page">
+    <div class="secret-box">
+      <span class="secret-label">☩ YOUR SECRET — READ ALONE ☩</span>
+      <div class="secret-text">The Ashvale family was on that hillside. Your grandmother was eight years old. She saw Father Voss ring the bell until the water took him. She never spoke of it — but she made you promise, on her deathbed, to go to Mirefall if you ever heard the bell ring. You heard it three weeks ago. You don't know how. Ask yourself: do you come here to make something right, or to make sure no one finds out what your family did?</div>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 2. VESPER CRANE — Gloom Stalker Ranger -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sheet-panel" id="panel-1" style="display: none;">
+<div class="sheet">
+  <div class="sheet-header">
+    <div class="char-title">Vesper Crane</div>
+    <div class="char-subtitle">Ranger (Gloom Stalker) · Human · Level 4</div>
+    <div class="char-tags">
+      <span class="tag">CHAOTIC GOOD</span>
+      <span class="tag">PROF BONUS +2</span>
+      <span class="tag">STRIKER</span>
+      <span class="tag">SCOUT</span>
+    </div>
+  </div>
+  <div class="hook-banner">"I track what hunts in the dark. Something is hunting here."</div>
+  <div class="sheet-body">
+
+    <div class="section">
+      <div class="section-head">ABILITY SCORES</div>
+      <div class="abilities">
+        <div class="ability"><span class="ability-name">STR</span><span class="ability-score">13</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">DEX</span><span class="ability-score">18</span><span class="ability-mod">+4</span></div>
+        <div class="ability"><span class="ability-name">CON</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+        <div class="ability"><span class="ability-name">INT</span><span class="ability-score">11</span><span class="ability-mod">+0</span></div>
+        <div class="ability"><span class="ability-name">WIS</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+        <div class="ability"><span class="ability-name">CHA</span><span class="ability-score">10</span><span class="ability-mod">+0</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">COMBAT</div>
+      <div class="combat-row">
+        <div class="combat-stat"><span class="combat-label">ARMOR CLASS</span><span class="combat-val">15</span></div>
+        <div class="combat-stat"><span class="combat-label">HIT POINTS</span><span class="combat-val">32</span></div>
+        <div class="combat-stat"><span class="combat-label">SPEED</span><span class="combat-val">30 ft</span></div>
+        <div class="combat-stat"><span class="combat-label">INITIATIVE</span><span class="combat-val">+4</span></div>
+      </div>
+      <div class="hp-tracker">
+        <div><div class="hp-label">CURRENT HP</div><div class="hp-box"></div></div>
+        <div><div class="hp-label">TEMP HP</div><div class="hp-box"></div></div>
+        <div class="death-saves">
+          <div class="death-label">DEATH SAVES</div>
+          <div class="death-row">Successes <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+          <div class="death-row">Failures <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-head">SAVING THROWS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Strength</li>
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Dexterity</li>
+          <li><span class="bonus">+2</span> Constitution</li>
+          <li><span class="bonus">+0</span> Intelligence</li>
+          <li><span class="bonus">+2</span> Wisdom</li>
+          <li><span class="bonus">+0</span> Charisma</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-head">SKILLS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Stealth</li>
+          <li><span class="prof-dot"></span><span class="bonus">+4</span> Perception</li>
+          <li><span class="prof-dot"></span><span class="bonus">+4</span> Survival</li>
+          <li><span class="prof-dot"></span><span class="bonus">+4</span> Athletics</li>
+          <li><span class="bonus">+0</span> Investigation</li>
+          <li><span class="bonus">+2</span> Nature</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">CLASS FEATURES</div>
+      <div class="trait">
+        <div class="trait-name">Dread Ambusher</div>
+        <div class="trait-body">+10 ft. speed on first turn of combat. On first turn, one extra attack. That attack deals +1d8 damage.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Umbral Sight</div>
+        <div class="trait-body">Darkvision 120 ft. in magical darkness. While in darkness, you are invisible to creatures relying on darkvision.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Favored Enemy: Undead</div>
+        <div class="trait-body">Advantage on Survival checks to track undead. Advantage on Intelligence checks to recall lore about them.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Extra Attack</div>
+        <div class="trait-body">Attack twice whenever you take the Attack action.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">SPELLCASTING — Save DC 12 · Attack +4</div>
+      <div class="spell-slots">
+        <div class="slot-group"><span class="slot-level">1ST LEVEL</span><span class="slot-count">3</span></div>
+      </div>
+      <div class="spell-grid">
+        <div class="spell-entry">Hunter's Mark <em>1st · concentration</em></div>
+        <div class="spell-entry">Zephyr Strike <em>1st · concentration</em></div>
+        <div class="spell-entry">Pass Without Trace <em>2nd · concentration</em></div>
+        <div class="spell-entry">Fog Cloud <em>1st</em></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">WEAPONS &amp; ATTACKS</div>
+      <div class="trait">
+        <div class="trait-name">Longbow — Ranged</div>
+        <div class="trait-body">+6 to hit · range 150/600 ft. · 1d8+4 piercing</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Shortsword — Melee</div>
+        <div class="trait-body">+6 to hit · 1d6+4 piercing · finesse, light</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">EQUIPMENT</div>
+      <ul class="equipment-list">
+        <li>Studded leather armor (AC 12+DEX)</li>
+        <li>Longbow + 40 arrows</li>
+        <li>2x Shortsword</li>
+        <li>Explorer's pack</li>
+        <li>50 ft. hempen rope</li>
+        <li>Tinderbox + torches (5)</li>
+        <li>Rations (5 days)</li>
+        <li>12 gp</li>
+      </ul>
+    </div>
+
+    <div class="section backstory-section">
+      <div class="section-head">BACKSTORY</div>
+      <div class="backstory">
+        Vesper Crane has worked the dark roads as a patrol ranger for six years. They are good at silence, good at waiting, and good at tracking things that don't want to be found. Their partner Dren was the opposite — loud, warm, always talking. They balanced each other out. Seven days ago, Dren rowed out onto Mirefall Lake with another man named Corvin to investigate the source of the ringing. Neither came back. The official word is that they drowned. Vesper has been following Dren's trail ever since, sleeping in three-hour stretches, eating when they remember to. The instinct that has kept them alive through six years of dark roads says Dren is still alive. Something is keeping him that way on purpose. Vesper came to Mirefall not for the reward, not for answers. They came because Dren is still out there, and they do not leave partners behind.
+      </div>
+      <div class="personality-grid">
+        <div class="personality-box">
+          <span class="personality-label">PERSONALITY</span>
+          <div class="personality-text">Economical with words. Watchful. The kind of person who notices when something is wrong before anyone else does.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">IDEAL</span>
+          <div class="personality-text">You don't leave people behind. Not partners, not strangers, not anyone.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">BOND</span>
+          <div class="personality-text">Dren is alive. I know it. Finding him is the only thing that matters right now.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">FLAW</span>
+          <div class="personality-text">I don't know how to stop moving. Stillness feels like giving up.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="secret-page">
+    <div class="secret-box">
+      <span class="secret-label">☩ YOUR SECRET — READ ALONE ☩</span>
+      <div class="secret-text">Dren is one of the two fishermen trapped in the sunken chapel. He's alive — barely — held in a trance by Father Voss's presence. Something is keeping him that way on purpose. When you find him, he may not want to leave. Ask yourself: when you find out what's down there, can you leave without Dren — even if he asks you to?</div>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 3. SABLE DAWNRIDGE — Vengeance Paladin -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sheet-panel" id="panel-2" style="display: none;">
+<div class="sheet">
+  <div class="sheet-header">
+    <div class="char-title">Sable Dawnridge</div>
+    <div class="char-subtitle">Paladin (Oath of Vengeance) · Tiefling · Level 4</div>
+    <div class="char-tags">
+      <span class="tag">LAWFUL NEUTRAL</span>
+      <span class="tag">PROF BONUS +2</span>
+      <span class="tag">TANK</span>
+      <span class="tag">STRIKER</span>
+    </div>
+  </div>
+  <div class="hook-banner">"I swore an oath to burn what cannot be redeemed. What if it can?"</div>
+  <div class="sheet-body">
+
+    <div class="section">
+      <div class="section-head">ABILITY SCORES</div>
+      <div class="abilities">
+        <div class="ability"><span class="ability-name">STR</span><span class="ability-score">17</span><span class="ability-mod">+3</span></div>
+        <div class="ability"><span class="ability-name">DEX</span><span class="ability-score">10</span><span class="ability-mod">+0</span></div>
+        <div class="ability"><span class="ability-name">CON</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+        <div class="ability"><span class="ability-name">INT</span><span class="ability-score">10</span><span class="ability-mod">+0</span></div>
+        <div class="ability"><span class="ability-name">WIS</span><span class="ability-score">12</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">CHA</span><span class="ability-score">16</span><span class="ability-mod">+3</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">COMBAT</div>
+      <div class="combat-row">
+        <div class="combat-stat"><span class="combat-label">ARMOR CLASS</span><span class="combat-val">18</span></div>
+        <div class="combat-stat"><span class="combat-label">HIT POINTS</span><span class="combat-val">36</span></div>
+        <div class="combat-stat"><span class="combat-label">SPEED</span><span class="combat-val">30 ft</span></div>
+        <div class="combat-stat"><span class="combat-label">INITIATIVE</span><span class="combat-val">+0</span></div>
+      </div>
+      <div class="hp-tracker">
+        <div><div class="hp-label">CURRENT HP</div><div class="hp-box"></div></div>
+        <div><div class="hp-label">TEMP HP</div><div class="hp-box"></div></div>
+        <div class="death-saves">
+          <div class="death-label">DEATH SAVES</div>
+          <div class="death-row">Successes <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+          <div class="death-row">Failures <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-head">SAVING THROWS</div>
+        <ul class="skill-list">
+          <li><span class="bonus">+3</span> Strength</li>
+          <li><span class="bonus">+0</span> Dexterity</li>
+          <li><span class="bonus">+2</span> Constitution</li>
+          <li><span class="bonus">+0</span> Intelligence</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Wisdom</li>
+          <li><span class="prof-dot"></span><span class="bonus">+5</span> Charisma</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-head">SKILLS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+5</span> Persuasion</li>
+          <li><span class="prof-dot"></span><span class="bonus">+5</span> Intimidation</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Athletics</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Religion</li>
+          <li><span class="bonus">+1</span> Perception</li>
+          <li><span class="bonus">+3</span> Insight</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">CLASS FEATURES</div>
+      <div class="trait">
+        <div class="trait-name">Divine Smite</div>
+        <div class="trait-body">When you hit with a melee attack, expend a spell slot to deal extra radiant damage: 2d8 (1st slot) +1d8 per slot level above 1st. +1d8 vs. undead or fiends.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Channel Divinity: Vow of Enmity</div>
+        <div class="trait-body">Bonus action. Gain advantage on all attack rolls against one creature for 1 minute. 1/short rest.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Lay on Hands</div>
+        <div class="trait-body">Pool of 20 HP. Use as an action to restore any amount of HP, or expend 5 HP to cure one disease or poison.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Tiefling Traits</div>
+        <div class="trait-body">Darkvision 60 ft. Resistance to fire damage. Thaumaturgy cantrip. Hellish Rebuke 1/day (2nd level, DC 13).</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Aura of Protection</div>
+        <div class="trait-body">You and allies within 10 ft. add +3 (CHA mod) to all saving throws while you are conscious.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">SPELLCASTING — Save DC 13 · Attack +5</div>
+      <div class="spell-slots">
+        <div class="slot-group"><span class="slot-level">1ST LEVEL</span><span class="slot-count">3</span></div>
+        <div class="slot-group"><span class="slot-level">2ND LEVEL</span><span class="slot-count">1</span></div>
+      </div>
+      <div class="spell-grid">
+        <div class="spell-entry">Bane <em>1st · oath</em></div>
+        <div class="spell-entry">Hunter's Mark <em>1st · oath</em></div>
+        <div class="spell-entry">Hold Person <em>2nd · oath</em></div>
+        <div class="spell-entry">Misty Step <em>2nd · oath</em></div>
+        <div class="spell-entry">Shield of Faith <em>1st</em></div>
+        <div class="spell-entry">Wrathful Smite <em>1st</em></div>
+        <div class="spell-entry">Thunderous Smite <em>1st</em></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">WEAPONS &amp; ATTACKS</div>
+      <div class="trait">
+        <div class="trait-name">Longsword — Melee (one-handed)</div>
+        <div class="trait-body">+5 to hit · 1d8+3 slashing</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Longsword — Melee (two-handed)</div>
+        <div class="trait-body">+5 to hit · 1d10+3 slashing · versatile</div>
+      </div>
+    </div>
+
+    <div class="section backstory-section">
+      <div class="section-head">BACKSTORY</div>
+      <div class="backstory">
+        Sable doesn't remember picking up the piece of iron. One day it was in the lining of their pack — old, corroded, curved, clearly a fragment of something larger. A blacksmith identified it as bell metal. Ancient bell metal. For six months before arriving at Mirefall, Sable had been having the same dream: underwater, cold, a tremendous ringing from all sides, and a voice saying "Bring it back." The fragment grows warmer the closer they get to the lake. Sable took the Oath of Vengeance because the world is full of things that refuse to be held accountable. But Father Voss is not one of those things — he was the victim. This is the first situation in Sable's career as a paladin where the target of a sworn oath turned out to be the wronged party. They have not figured out what that means for them yet.
+      </div>
+      <div class="personality-grid">
+        <div class="personality-box">
+          <span class="personality-label">PERSONALITY</span>
+          <div class="personality-text">Intense and direct. Takes oaths seriously to a fault. Has a dry, dark sense of humor that surprises people.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">IDEAL</span>
+          <div class="personality-text">Accountability. Someone has to answer for every wrong. That's what I'm here for.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">BOND</span>
+          <div class="personality-text">The bell fragment. I don't know what it is yet, but it chose me for something.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">FLAW</span>
+          <div class="personality-text">Once I've decided someone deserves punishment, I find it hard to change my mind even with new information.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="secret-page">
+    <div class="secret-box">
+      <span class="secret-label">☩ YOUR SECRET — READ ALONE ☩</span>
+      <div class="secret-text">The iron fragment in your pack is a piece of the chapel bell. You've been carrying it for three months with no memory of picking it up. It grows warm near water. Father Voss knows you have it — he may have sent it to you. The dream said "bring it back." What happens when you do — and do you have a choice?</div>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 4. THESSALY VORNE — Necromancer Wizard -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sheet-panel" id="panel-3" style="display: none;">
+<div class="sheet">
+  <div class="sheet-header">
+    <div class="char-title">Thessaly Vorne</div>
+    <div class="char-subtitle">Wizard (School of Necromancy) · Half-Elf · Level 4</div>
+    <div class="char-tags">
+      <span class="tag">TRUE NEUTRAL</span>
+      <span class="tag">PROF BONUS +2</span>
+      <span class="tag">CONTROLLER</span>
+      <span class="tag">BLASTER</span>
+    </div>
+  </div>
+  <div class="hook-banner">"The dead speak clearly. It's the living I have trouble with."</div>
+  <div class="sheet-body">
+
+    <div class="section">
+      <div class="section-head">ABILITY SCORES</div>
+      <div class="abilities">
+        <div class="ability"><span class="ability-name">STR</span><span class="ability-score">8</span><span class="ability-mod">-1</span></div>
+        <div class="ability"><span class="ability-name">DEX</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+        <div class="ability"><span class="ability-name">CON</span><span class="ability-score">13</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">INT</span><span class="ability-score">18</span><span class="ability-mod">+4</span></div>
+        <div class="ability"><span class="ability-name">WIS</span><span class="ability-score">12</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">CHA</span><span class="ability-score">11</span><span class="ability-mod">+0</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">COMBAT</div>
+      <div class="combat-row">
+        <div class="combat-stat"><span class="combat-label">ARMOR CLASS</span><span class="combat-val">13</span></div>
+        <div class="combat-stat"><span class="combat-label">HIT POINTS</span><span class="combat-val">22</span></div>
+        <div class="combat-stat"><span class="combat-label">SPEED</span><span class="combat-val">30 ft</span></div>
+        <div class="combat-stat"><span class="combat-label">INITIATIVE</span><span class="combat-val">+2</span></div>
+      </div>
+      <div class="hp-tracker">
+        <div><div class="hp-label">CURRENT HP</div><div class="hp-box"></div></div>
+        <div><div class="hp-label">TEMP HP</div><div class="hp-box"></div></div>
+        <div class="death-saves">
+          <div class="death-label">DEATH SAVES</div>
+          <div class="death-row">Successes <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+          <div class="death-row">Failures <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-head">SAVING THROWS</div>
+        <ul class="skill-list">
+          <li><span class="bonus">-1</span> Strength</li>
+          <li><span class="bonus">+2</span> Dexterity</li>
+          <li><span class="bonus">+1</span> Constitution</li>
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Intelligence</li>
+          <li><span class="bonus">+1</span> Wisdom</li>
+          <li><span class="prof-dot"></span><span class="bonus">+2</span> Charisma</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-head">SKILLS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Arcana</li>
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> History</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Investigation</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Insight</li>
+          <li><span class="bonus">+1</span> Perception</li>
+          <li><span class="bonus">+0</span> Persuasion</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">CLASS FEATURES</div>
+      <div class="trait">
+        <div class="trait-name">Grim Harvest</div>
+        <div class="trait-body">When you kill a creature with a spell (not undead/constructs), regain HP equal to twice the spell's level (thrice for necromancy spells).</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Undead Thralls</div>
+        <div class="trait-body">Add your proficiency bonus to damage rolls for undead you animate. Animate Dead can create one extra undead. Your undead have +4 max HP per your wizard level.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Arcane Recovery</div>
+        <div class="trait-body">Once per long rest, on a short rest, recover expended spell slots totaling up to 2 levels (not 6th level or higher).</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">SPELLCASTING — Save DC 14 · Attack +6</div>
+      <div class="spell-slots">
+        <div class="slot-group"><span class="slot-level">CANTRIPS</span><span class="slot-count">∞</span></div>
+        <div class="slot-group"><span class="slot-level">1ST LEVEL</span><span class="slot-count">4</span></div>
+        <div class="slot-group"><span class="slot-level">2ND LEVEL</span><span class="slot-count">3</span></div>
+      </div>
+      <div class="spell-grid">
+        <div class="spell-entry">Chill Touch <em>cantrip</em></div>
+        <div class="spell-entry">Mage Hand <em>cantrip</em></div>
+        <div class="spell-entry">Minor Illusion <em>cantrip</em></div>
+        <div class="spell-entry">Ray of Frost <em>cantrip</em></div>
+        <div class="spell-entry">False Life <em>1st</em></div>
+        <div class="spell-entry">Ray of Sickness <em>1st</em></div>
+        <div class="spell-entry">Detect Magic <em>1st · ritual</em></div>
+        <div class="spell-entry">Shield <em>1st · reaction</em></div>
+        <div class="spell-entry">Misty Step <em>2nd</em></div>
+        <div class="spell-entry">Blindness/Deafness <em>2nd</em></div>
+        <div class="spell-entry">Animate Dead <em>3rd · prep</em></div>
+        <div class="spell-entry">Speak with Dead <em>3rd · prep</em></div>
+      </div>
+    </div>
+
+    <div class="section backstory-section">
+      <div class="section-head">BACKSTORY</div>
+      <div class="backstory">
+        Thessaly has always felt more comfortable with the dead than the living. The dead don't lie, don't deflect, don't perform. When Thessaly began researching their family genealogy — a project that started as academic curiosity — the trail led somewhere unexpected: a land dispute in a village called Mirefall, sixty years ago, and a priest who drowned in a flood while ringing a warning bell. House Vorne had signed the dispute papers. Withdrew last-minute. And, according to a single faded line in a parish record, tried to send warning to the chapel — and was physically stopped by the other families. Thessaly's ancestor tried to save Father Voss. Was prevented. And has never been part of any version of the story anyone tells. Thessaly came to Mirefall to find out if that line in the record is true, and if so, to make sure it is finally part of the story.
+      </div>
+      <div class="personality-grid">
+        <div class="personality-box">
+          <span class="personality-label">PERSONALITY</span>
+          <div class="personality-text">Precise and a little detached. Speaks in complete sentences. Asks better questions than most people can answer.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">IDEAL</span>
+          <div class="personality-text">Accuracy. History belongs to whoever writes it down correctly. I intend to write it correctly.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">BOND</span>
+          <div class="personality-text">My ancestor tried to save Voss. That has never been acknowledged. I am here to acknowledge it.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">FLAW</span>
+          <div class="personality-text">I treat people like research subjects sometimes. I don't always notice when this is upsetting.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="secret-page">
+    <div class="secret-box">
+      <span class="secret-label">☩ YOUR SECRET — READ ALONE ☩</span>
+      <div class="secret-text">Your ancestor tried to warn Father Voss. Was stopped. That line in the record is real — and when you find Voss, he may already know the Vorne name. He may know your ancestor was different from the others. If he speaks your family name — what do you hope he says?</div>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 5. ASH — Phantom Rogue -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sheet-panel" id="panel-4" style="display: none;">
+<div class="sheet">
+  <div class="sheet-header">
+    <div class="char-title">Ash</div>
+    <div class="char-subtitle">Rogue (Phantom Subclass) · Halfling · Level 4</div>
+    <div class="char-tags">
+      <span class="tag">CHAOTIC NEUTRAL</span>
+      <span class="tag">PROF BONUS +2</span>
+      <span class="tag">STRIKER</span>
+      <span class="tag">SCOUT</span>
+    </div>
+  </div>
+  <div class="hook-banner">"I don't know who I was. I know what I can do. That's enough."</div>
+  <div class="sheet-body">
+
+    <div class="section">
+      <div class="section-head">ABILITY SCORES</div>
+      <div class="abilities">
+        <div class="ability"><span class="ability-name">STR</span><span class="ability-score">8</span><span class="ability-mod">-1</span></div>
+        <div class="ability"><span class="ability-name">DEX</span><span class="ability-score">18</span><span class="ability-mod">+4</span></div>
+        <div class="ability"><span class="ability-name">CON</span><span class="ability-score">12</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">INT</span><span class="ability-score">13</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">WIS</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+        <div class="ability"><span class="ability-name">CHA</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">COMBAT</div>
+      <div class="combat-row">
+        <div class="combat-stat"><span class="combat-label">ARMOR CLASS</span><span class="combat-val">15</span></div>
+        <div class="combat-stat"><span class="combat-label">HIT POINTS</span><span class="combat-val">26</span></div>
+        <div class="combat-stat"><span class="combat-label">SPEED</span><span class="combat-val">25 ft</span></div>
+        <div class="combat-stat"><span class="combat-label">INITIATIVE</span><span class="combat-val">+4</span></div>
+      </div>
+      <div class="hp-tracker">
+        <div><div class="hp-label">CURRENT HP</div><div class="hp-box"></div></div>
+        <div><div class="hp-label">TEMP HP</div><div class="hp-box"></div></div>
+        <div class="death-saves">
+          <div class="death-label">DEATH SAVES</div>
+          <div class="death-row">Successes <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+          <div class="death-row">Failures <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-head">SAVING THROWS</div>
+        <ul class="skill-list">
+          <li><span class="bonus">-1</span> Strength</li>
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Dexterity</li>
+          <li><span class="bonus">+1</span> Constitution</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Intelligence</li>
+          <li><span class="bonus">+2</span> Wisdom</li>
+          <li><span class="bonus">+2</span> Charisma</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-head">SKILLS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+8</span> Stealth</li>
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Sleight of Hand</li>
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Acrobatics</li>
+          <li><span class="prof-dot"></span><span class="bonus">+4</span> Perception</li>
+          <li><span class="prof-dot"></span><span class="bonus">+4</span> Insight</li>
+          <li><span class="prof-dot"></span><span class="bonus">+4</span> Deception</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">CLASS FEATURES</div>
+      <div class="trait">
+        <div class="trait-name">Sneak Attack — 2d6</div>
+        <div class="trait-body">Once per turn, deal +2d6 damage when you hit with a finesse or ranged weapon and have advantage, or an ally is adjacent to the target.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Wails from the Grave</div>
+        <div class="trait-body">After Sneak Attack, use a bonus action to deal half your Sneak Attack dice in necrotic damage to a second creature within 30 ft. of target. WIS mod times per long rest.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Tokens of the Departed</div>
+        <div class="trait-body">When a creature dies within 30 ft., you can use a reaction to create a tiny trinket containing a wisp of its spirit (WIS mod trinkets max). You can hold the trinket to ask 1 question — the spirit answers in one sentence.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Halfling Luck · Brave · Nimble</div>
+        <div class="trait-body">Reroll nat 1s on attacks, checks, saves. Advantage on saves vs. frightened. Move through spaces of larger creatures.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Uncanny Dodge · Evasion</div>
+        <div class="trait-body">Reaction to halve one attack's damage. On DEX saves: no damage on success, half on fail.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">WEAPONS &amp; ATTACKS</div>
+      <div class="trait">
+        <div class="trait-name">Rapier — Melee</div>
+        <div class="trait-body">+6 to hit · 1d8+4 piercing · finesse</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Hand Crossbow — Ranged</div>
+        <div class="trait-body">+6 to hit · range 30/120 ft. · 1d6+4 piercing</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Dagger — Melee/Thrown</div>
+        <div class="trait-body">+6 to hit · range 20/60 ft. · 1d4+4 piercing</div>
+      </div>
+    </div>
+
+    <div class="section backstory-section">
+      <div class="section-head">BACKSTORY</div>
+      <div class="backstory">
+        Six years ago Ash woke up on a riverbank with no name, no past, no explanation, and water in their lungs that shouldn't have been there. They named themselves Ash because it felt appropriate — something that used to be something else. Since then they've gotten very good at surviving and very bad at staying in one place. They can hear things others can't: not voices exactly, but the emotional residue left in spaces. Grief soaked into walls. The weight of something unfinished. They've been following that feeling toward Mirefall for two weeks without knowing why. Last night they dreamed of standing chest-deep in cold water, ringing a bell they couldn't stop ringing, watching people on a hillside watch them drown. They don't know whose memory that is. They're starting to have a theory.
+      </div>
+      <div class="personality-grid">
+        <div class="personality-box">
+          <span class="personality-label">PERSONALITY</span>
+          <div class="personality-text">Wry and observant. Deflects serious questions with humor. Genuinely curious about everyone except themselves.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">IDEAL</span>
+          <div class="personality-text">Motion. Keep moving, stay useful, worry about the rest later.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">BOND</span>
+          <div class="personality-text">I don't have anyone. Which means I'll do a lot for the people who decide to stand next to me.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">FLAW</span>
+          <div class="personality-text">I run from things I can't name. I have a lot of practice.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="secret-page">
+    <div class="secret-box">
+      <span class="secret-label">☩ YOUR SECRET — READ ALONE ☩</span>
+      <div class="secret-text">You didn't just survive something at that river six years ago. Part of you didn't survive at all. The dream isn't someone else's memory — it's yours, from a life before this one. You are connected to Father Voss in a way you don't have words for yet. Ask yourself: what happens if finding out who you were means losing who you are now?</div>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 6. BROTHER MAEL — Shadow Monk -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sheet-panel" id="panel-5" style="display: none;">
+<div class="sheet">
+  <div class="sheet-header">
+    <div class="char-title">Brother Mael</div>
+    <div class="char-subtitle">Monk (Way of Shadow) · Elf · Level 4</div>
+    <div class="char-tags">
+      <span class="tag">LAWFUL NEUTRAL</span>
+      <span class="tag">PROF BONUS +2</span>
+      <span class="tag">STRIKER</span>
+      <span class="tag">INFILTRATOR</span>
+    </div>
+  </div>
+  <div class="hook-banner">"My abbot told me to deliver a letter. He did not tell me the recipient was dead."</div>
+  <div class="sheet-body">
+
+    <div class="section">
+      <div class="section-head">ABILITY SCORES</div>
+      <div class="abilities">
+        <div class="ability"><span class="ability-name">STR</span><span class="ability-score">12</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">DEX</span><span class="ability-score">18</span><span class="ability-mod">+4</span></div>
+        <div class="ability"><span class="ability-name">CON</span><span class="ability-score">13</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">INT</span><span class="ability-score">12</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">WIS</span><span class="ability-score">17</span><span class="ability-mod">+3</span></div>
+        <div class="ability"><span class="ability-name">CHA</span><span class="ability-score">10</span><span class="ability-mod">+0</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">COMBAT</div>
+      <div class="combat-row">
+        <div class="combat-stat"><span class="combat-label">ARMOR CLASS</span><span class="combat-val">17</span></div>
+        <div class="combat-stat"><span class="combat-label">HIT POINTS</span><span class="combat-val">30</span></div>
+        <div class="combat-stat"><span class="combat-label">SPEED</span><span class="combat-val">40 ft</span></div>
+        <div class="combat-stat"><span class="combat-label">INITIATIVE</span><span class="combat-val">+4</span></div>
+      </div>
+      <div class="hp-tracker">
+        <div><div class="hp-label">CURRENT HP</div><div class="hp-box"></div></div>
+        <div><div class="hp-label">TEMP HP</div><div class="hp-box"></div></div>
+        <div class="death-saves">
+          <div class="death-label">DEATH SAVES</div>
+          <div class="death-row">Successes <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+          <div class="death-row">Failures <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-head">SAVING THROWS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Strength</li>
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Dexterity</li>
+          <li><span class="bonus">+1</span> Constitution</li>
+          <li><span class="bonus">+1</span> Intelligence</li>
+          <li><span class="bonus">+3</span> Wisdom</li>
+          <li><span class="bonus">+0</span> Charisma</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-head">SKILLS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Stealth</li>
+          <li><span class="prof-dot"></span><span class="bonus">+5</span> Acrobatics</li>
+          <li><span class="prof-dot"></span><span class="bonus">+5</span> Insight</li>
+          <li><span class="prof-dot"></span><span class="bonus">+5</span> Perception</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> History</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Religion</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">CLASS FEATURES</div>
+      <div class="trait">
+        <div class="trait-name">Ki Points — 4 per long rest</div>
+        <div class="trait-body">Flurry of Blows (1 ki): Two bonus unarmed strikes. Patient Defense (1 ki): Dodge as bonus action. Step of the Wind (1 ki): Disengage/Dash as bonus action.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Shadow Arts</div>
+        <div class="trait-body">Spend 2 ki to cast: Darkness, Darkvision, Pass Without Trace, or Silence (no spell slot needed). Darkvision to 60 ft. always.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Shadow Step</div>
+        <div class="trait-body">Bonus action: teleport up to 60 ft. between areas of dim light or darkness. Advantage on first melee attack after teleporting.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Stunning Strike</div>
+        <div class="trait-body">After hitting with melee, spend 1 ki: target makes CON save DC 14 or is stunned until end of your next turn.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Deflect Missiles · Slow Fall</div>
+        <div class="trait-body">Reaction to reduce ranged damage by 1d10+7. Reduce fall damage by 20 ft.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">WEAPONS &amp; ATTACKS — Martial Arts die: d6</div>
+      <div class="trait">
+        <div class="trait-name">Unarmed Strike — Melee</div>
+        <div class="trait-body">+6 to hit · 1d6+4 bludgeoning</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Shortsword — Melee</div>
+        <div class="trait-body">+6 to hit · 1d6+4 piercing · finesse, light</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Dart — Thrown</div>
+        <div class="trait-body">+6 to hit · range 20/60 ft. · 1d4+4 piercing</div>
+      </div>
+    </div>
+
+    <div class="section backstory-section">
+      <div class="section-head">BACKSTORY</div>
+      <div class="backstory">
+        Brother Mael has spent twenty years learning to be invisible, to be silent, to be useful in the dark. The monastery asks few questions and answers fewer. When the abbot gave Mael a sealed letter addressed to Father Aldric Voss at Mirefall Lake and said only that it was a matter of great spiritual importance, Mael accepted the assignment without asking for details. That was the custom. On the road, Mael learned that Father Voss had drowned a century ago. The letter is still sealed. It has no weight — actual paper and wax should have weight, and this has none. In deep meditation, Mael sometimes hears something moving inside it. The monastery has been sending monks to Mirefall for a very long time. Mael is beginning to understand that none of the ones before ever came back. The question of whether to deliver the letter, open it, or let it sink is the most important question Mael has ever faced.
+      </div>
+      <div class="personality-grid">
+        <div class="personality-box">
+          <span class="personality-label">PERSONALITY</span>
+          <div class="personality-text">Still and measured. Comfortable with silence in a way most people find unsettling. Genuinely kind when it surfaces.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">IDEAL</span>
+          <div class="personality-text">Discipline. Every action has consequence. Take only the actions you are willing to answer for.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">BOND</span>
+          <div class="personality-text">The letter. Whatever is inside it, I was trusted to carry it. That trust means something to me even now.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">FLAW</span>
+          <div class="personality-text">I follow instructions even when I shouldn't. I was trained not to question. That training may get me killed.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="secret-page">
+    <div class="secret-box">
+      <span class="secret-label">☩ YOUR SECRET — READ ALONE ☩</span>
+      <div class="secret-text">The letter has no weight. Something moves inside it. Your monastery has sent monks to this lake for a hundred years and none returned. Your abbot knew all of this. The question isn't whether to deliver the letter — the question is whether your monastery has been working with Voss, or against him. Ask yourself: when the time comes, do you deliver it, open it, or let it sink?</div>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 7. ISOLDE MOURNE — College of Spirits Bard -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sheet-panel" id="panel-6" style="display: none;">
+<div class="sheet">
+  <div class="sheet-header">
+    <div class="char-title">Isolde Mourne</div>
+    <div class="char-subtitle">Bard (College of Spirits) · Human · Level 4</div>
+    <div class="char-tags">
+      <span class="tag">CHAOTIC GOOD</span>
+      <span class="tag">PROF BONUS +2</span>
+      <span class="tag">SUPPORT</span>
+      <span class="tag">FACE</span>
+    </div>
+  </div>
+  <div class="hook-banner">"My sister came here two years ago. She didn't come home. I intend to find out why."</div>
+  <div class="sheet-body">
+
+    <div class="section">
+      <div class="section-head">ABILITY SCORES</div>
+      <div class="abilities">
+        <div class="ability"><span class="ability-name">STR</span><span class="ability-score">9</span><span class="ability-mod">-1</span></div>
+        <div class="ability"><span class="ability-name">DEX</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+        <div class="ability"><span class="ability-name">CON</span><span class="ability-score">13</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">INT</span><span class="ability-score">13</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">WIS</span><span class="ability-score">14</span><span class="ability-mod">+2</span></div>
+        <div class="ability"><span class="ability-name">CHA</span><span class="ability-score">18</span><span class="ability-mod">+4</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">COMBAT</div>
+      <div class="combat-row">
+        <div class="combat-stat"><span class="combat-label">ARMOR CLASS</span><span class="combat-val">14</span></div>
+        <div class="combat-stat"><span class="combat-label">HIT POINTS</span><span class="combat-val">27</span></div>
+        <div class="combat-stat"><span class="combat-label">SPEED</span><span class="combat-val">30 ft</span></div>
+        <div class="combat-stat"><span class="combat-label">INITIATIVE</span><span class="combat-val">+2</span></div>
+      </div>
+      <div class="hp-tracker">
+        <div><div class="hp-label">CURRENT HP</div><div class="hp-box"></div></div>
+        <div><div class="hp-label">TEMP HP</div><div class="hp-box"></div></div>
+        <div class="death-saves">
+          <div class="death-label">DEATH SAVES</div>
+          <div class="death-row">Successes <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+          <div class="death-row">Failures <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-head">SAVING THROWS</div>
+        <ul class="skill-list">
+          <li><span class="bonus">-1</span> Strength</li>
+          <li><span class="bonus">+2</span> Dexterity</li>
+          <li><span class="bonus">+1</span> Constitution</li>
+          <li><span class="bonus">+1</span> Intelligence</li>
+          <li><span class="bonus">+2</span> Wisdom</li>
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Charisma</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-head">SKILLS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Persuasion</li>
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Performance</li>
+          <li><span class="prof-dot"></span><span class="bonus">+4</span> Insight</li>
+          <li><span class="prof-dot"></span><span class="bonus">+4</span> Perception</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Arcana</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> History</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">CLASS FEATURES</div>
+      <div class="trait">
+        <div class="trait-name">Bardic Inspiration — d6 (4/long rest)</div>
+        <div class="trait-body">Bonus action: give one creature within 60 ft. a Bardic Inspiration die. They can add it to one ability check, attack, or saving throw within 10 minutes.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Tales from Beyond</div>
+        <div class="trait-body">Expend a Bardic Inspiration die and roll it to contact a spirit and receive a tale. The effect depends on the roll result (1–6 different effects, ranging from Boon of Combat to Tales of the Dead that cast Speak with Dead).</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Spirit Session</div>
+        <div class="trait-body">1/long rest: ritual to contact spirits and learn a spell from the divination or necromancy school (bonus spell, doesn't count toward spells known).</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Jack of All Trades · Song of Rest</div>
+        <div class="trait-body">Add +1 to any skill check you aren't proficient in. Party heals extra 1d6 on short rest.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">SPELLCASTING — Save DC 14 · Attack +6</div>
+      <div class="spell-slots">
+        <div class="slot-group"><span class="slot-level">CANTRIPS</span><span class="slot-count">∞</span></div>
+        <div class="slot-group"><span class="slot-level">1ST LEVEL</span><span class="slot-count">4</span></div>
+        <div class="slot-group"><span class="slot-level">2ND LEVEL</span><span class="slot-count">3</span></div>
+      </div>
+      <div class="spell-grid">
+        <div class="spell-entry">Vicious Mockery <em>cantrip</em></div>
+        <div class="spell-entry">Minor Illusion <em>cantrip</em></div>
+        <div class="spell-entry">Prestidigitation <em>cantrip</em></div>
+        <div class="spell-entry">Speak with Dead <em>bonus · spirits</em></div>
+        <div class="spell-entry">Bane <em>1st</em></div>
+        <div class="spell-entry">Healing Word <em>1st</em></div>
+        <div class="spell-entry">Dissonant Whispers <em>1st</em></div>
+        <div class="spell-entry">Unseen Servant <em>1st · ritual</em></div>
+        <div class="spell-entry">Detect Thoughts <em>2nd</em></div>
+        <div class="spell-entry">Silence <em>2nd · ritual</em></div>
+        <div class="spell-entry">Calm Emotions <em>2nd</em></div>
+      </div>
+    </div>
+
+    <div class="section backstory-section">
+      <div class="section-head">BACKSTORY</div>
+      <div class="backstory">
+        Isolde has always been able to hear the dead. Not clearly — it's more like catching the edge of a conversation through a wall. She's built a career around it, telling ghost stories, speaking at seances, finding meaning in the space between what the living know and what the dead remember. Her sister Lira was a researcher, methodical where Isolde is instinctive. Two years ago Lira went to Mirefall Lake following a rumor about a haunted church bell. She never came home. The official report said she drowned. Isolde does not believe it — Lira was the strongest swimmer she knew, and she was careful, and she knew water. Three months after Lira's disappearance, Isolde woke to her sister's voice saying two words: "He's waiting." Since then, Isolde has not been able to reach Lira through any of her methods. Something at that lake is blocking her sister's voice. Isolde came to find out what — and to bring Lira home, in whatever form that's possible.
+      </div>
+      <div class="personality-grid">
+        <div class="personality-box">
+          <span class="personality-label">PERSONALITY</span>
+          <div class="personality-text">Warm and expansive in company. Genuinely interested in everyone's story. Falls quiet near water.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">IDEAL</span>
+          <div class="personality-text">Every story deserves to be finished. Nobody should have to end mid-sentence.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">BOND</span>
+          <div class="personality-text">Lira. Whatever it takes. I am not leaving this lake without knowing what happened to my sister.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">FLAW</span>
+          <div class="personality-text">I am so desperate to hear Lira's voice that I might believe something false if it sounds like her.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="secret-page">
+    <div class="secret-box">
+      <span class="secret-label">☩ YOUR SECRET — READ ALONE ☩</span>
+      <div class="secret-text">Your sister Lira is still at the lake. Not alive — but not gone either. She chose to stay, drawn in by Voss's grief. She may be one of the voices you can reach through your music. When you find her, she may tell you she's at peace. She may ask you to leave her there. Ask yourself: if Lira tells you she chose to stay — can you accept that?</div>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 8. CALDER THORNE — Rune Knight Fighter -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="sheet-panel" id="panel-7" style="display: none;">
+<div class="sheet">
+  <div class="sheet-header">
+    <div class="char-title">Calder Thorne</div>
+    <div class="char-subtitle">Fighter (Rune Knight) · Dwarf · Level 4</div>
+    <div class="char-tags">
+      <span class="tag">LAWFUL GOOD</span>
+      <span class="tag">PROF BONUS +2</span>
+      <span class="tag">TANK</span>
+      <span class="tag">STRIKER</span>
+    </div>
+  </div>
+  <div class="hook-banner">"I came for answers. I'm staying because someone has to be between you and that."</div>
+  <div class="sheet-body">
+
+    <div class="section">
+      <div class="section-head">ABILITY SCORES</div>
+      <div class="abilities">
+        <div class="ability"><span class="ability-name">STR</span><span class="ability-score">18</span><span class="ability-mod">+4</span></div>
+        <div class="ability"><span class="ability-name">DEX</span><span class="ability-score">11</span><span class="ability-mod">+0</span></div>
+        <div class="ability"><span class="ability-name">CON</span><span class="ability-score">17</span><span class="ability-mod">+3</span></div>
+        <div class="ability"><span class="ability-name">INT</span><span class="ability-score">12</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">WIS</span><span class="ability-score">13</span><span class="ability-mod">+1</span></div>
+        <div class="ability"><span class="ability-name">CHA</span><span class="ability-score">10</span><span class="ability-mod">+0</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">COMBAT</div>
+      <div class="combat-row">
+        <div class="combat-stat"><span class="combat-label">ARMOR CLASS</span><span class="combat-val">18</span></div>
+        <div class="combat-stat"><span class="combat-label">HIT POINTS</span><span class="combat-val">42</span></div>
+        <div class="combat-stat"><span class="combat-label">SPEED</span><span class="combat-val">25 ft</span></div>
+        <div class="combat-stat"><span class="combat-label">INITIATIVE</span><span class="combat-val">+0</span></div>
+      </div>
+      <div class="hp-tracker">
+        <div><div class="hp-label">CURRENT HP</div><div class="hp-box"></div></div>
+        <div><div class="hp-label">TEMP HP</div><div class="hp-box"></div></div>
+        <div class="death-saves">
+          <div class="death-label">DEATH SAVES</div>
+          <div class="death-row">Successes <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+          <div class="death-row">Failures <span class="death-circle"></span><span class="death-circle"></span><span class="death-circle"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="section">
+        <div class="section-head">SAVING THROWS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Strength</li>
+          <li><span class="bonus">+0</span> Dexterity</li>
+          <li><span class="prof-dot"></span><span class="bonus">+5</span> Constitution</li>
+          <li><span class="bonus">+1</span> Intelligence</li>
+          <li><span class="bonus">+1</span> Wisdom</li>
+          <li><span class="bonus">+0</span> Charisma</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="section-head">SKILLS</div>
+        <ul class="skill-list">
+          <li><span class="prof-dot"></span><span class="bonus">+6</span> Athletics</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Perception</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> Intimidation</li>
+          <li><span class="prof-dot"></span><span class="bonus">+3</span> History</li>
+          <li><span class="bonus">+1</span> Insight</li>
+          <li><span class="bonus">+0</span> Persuasion</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">CLASS FEATURES</div>
+      <div class="trait">
+        <div class="trait-name">Action Surge (1/short rest)</div>
+        <div class="trait-body">Take one additional action on your turn.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Extra Attack</div>
+        <div class="trait-body">Attack twice whenever you take the Attack action.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Rune Carving — 2 Runes Known</div>
+        <div class="trait-body">Stone Rune: Reaction when creature within 30 ft. makes a check; impose disadvantage. Giant's Might (bonus action): enlarge to Large size for 1 minute; +1d6 damage on attacks. 1/short rest.</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Dwarf Traits</div>
+        <div class="trait-body">Darkvision 60 ft. Resistance to poison damage. Advantage on poison saves. Stonecunning (History +2 with stonework).</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Second Wind (1/short rest)</div>
+        <div class="trait-body">Bonus action: regain 1d10+4 HP.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">WEAPONS &amp; ATTACKS</div>
+      <div class="trait">
+        <div class="trait-name">Warhammer — Melee (one-handed)</div>
+        <div class="trait-body">+6 to hit · 1d8+4 bludgeoning</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Warhammer — Melee (two-handed)</div>
+        <div class="trait-body">+6 to hit · 1d10+4 bludgeoning · versatile</div>
+      </div>
+      <div class="trait">
+        <div class="trait-name">Handaxe — Thrown</div>
+        <div class="trait-body">+6 to hit · range 20/60 ft. · 1d6+4 slashing</div>
+      </div>
+    </div>
+
+    <div class="section backstory-section">
+      <div class="section-head">BACKSTORY</div>
+      <div class="backstory">
+        Three weeks ago Calder woke with runes carved into both forearms, shoulder to wrist. They weren't there when he went to sleep. They don't hurt. They don't fade. They are in no script he has ever studied — and he has studied runes his entire life, which is saying something for a Rune Knight. A scholar he consulted in secret recognized one symbol: a binding ward used in drowned-god rituals to mark someone as a vessel. She suggested, carefully, that Calder avoid large bodies of water. He is at Mirefall Lake because he needs answers more than he needs safety. When he approaches the lake, the runes glow faint blue. He hasn't told anyone. He's been wearing his armor with the sleeves fully down in the summer heat and hoping nobody notices he's sweating for reasons that have nothing to do with temperature.
+      </div>
+      <div class="personality-grid">
+        <div class="personality-box">
+          <span class="personality-label">PERSONALITY</span>
+          <div class="personality-text">Steady and reliable to a fault. The person you want at your back. Quietly frightened of what's happening to him but won't show it.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">IDEAL</span>
+          <div class="personality-text">Duty. You show up. You do the work. You don't complain. You figure the rest out later.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">BOND</span>
+          <div class="personality-text">These runes. Whatever they make me, I intend to be the one who decides what I do with it.</div>
+        </div>
+        <div class="personality-box">
+          <span class="personality-label">FLAW</span>
+          <div class="personality-text">I don't ask for help. I should. I really should.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="secret-page">
+    <div class="secret-box">
+      <span class="secret-label">☩ YOUR SECRET — READ ALONE ☩</span>
+      <div class="secret-text">The runes appeared the same night the bell started ringing. Father Voss marked you before you ever came to Mirefall — he chose you specifically, for reasons you don't know yet. The binding ward means you are being prepared as a vessel. Near the bell, near Voss himself, you may feel a pull unlike anything you've experienced. Ask yourself: what does Father Voss want with you — and will you let him have it?</div>
+    </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 9. NPC REFERENCE -->
+<!-- ═══════════════════════════════════════════ -->
+  </div><!-- /sheets-wrap -->
+</div><!-- /section-sheets -->
+
+<!-- ══════════════════════════════════════
+     SECRETS
+══════════════════════════════════════ -->
+<div class="section-wrap" id="section-secrets">
+  <div class="secrets-inner">
+    <div class="secrets-title">☩ Mirefall — Character Secrets ☩</div>
+    <div class="secrets-sub">Print · Fold on dashed line · Hand to each player with their character sheet · Read alone</div>
+    <div class="notes-grid">
+
+
+  <!-- ══════════════ ORYN ASHVALE ══════════════ -->
+  <div class="note">
+    <div class="note-outside">
+      <div class="fold-label">For the Eyes of —</div>
+      <div class="char-name-label"><span class="note-sigil">⚰</span>Oryn Ashvale</div>
+      <div class="char-class-label">Grave Cleric · Half-Elf</div>
+      <div class="fold-indicator">— fold here · read alone —</div>
+    </div>
+    <div class="note-inside">
+      <div class="secret-header">☩ Your Secret ☩</div>
+      <hr class="secret-rule">
+      <div class="secret-text-card">
+        <p>You know the name Mirefall. Your grandmother spoke it in her sleep for the last decade of her life — always the same word, always with the same expression. Not fear. <em>Guilt.</em></p>
+        <p>The Ashvale family was one of six families feuding with the church over land the year of the flood. Your grandmother was eight years old. She was on the hillside. She saw everything.</p>
+        <p>She never told you what she saw. But she made you promise, on her deathbed, to go to Mirefall if you ever heard the bell.</p>
+        <p>You heard it three weeks ago. You don't know how.</p>
+      </div>
+      <div class="secret-prompt">
+        Ask yourself —
+        <span>Does your character come here to make something right, or to make sure no one finds out what their family did?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ VESPER CRANE ══════════════ -->
+  <div class="note">
+    <div class="note-outside">
+      <div class="fold-label">For the Eyes of —</div>
+      <div class="char-name-label"><span class="note-sigil">🌑</span>Vesper Crane</div>
+      <div class="char-class-label">Gloom Stalker Ranger · Human</div>
+      <div class="fold-indicator">— fold here · read alone —</div>
+    </div>
+    <div class="note-inside">
+      <div class="secret-header">☩ Your Secret ☩</div>
+      <hr class="secret-rule">
+      <div class="secret-text-card">
+        <p>Your patrol partner, Dren, went missing on Mirefall Lake seven days ago. He was one of two fishermen who rowed out to investigate the bell. Neither came back.</p>
+        <p>You and Dren weren't just partners. You were the closest thing either of you had to family. You've been tracking his last known movements for a week and the trail ends at the dockhouse.</p>
+        <p>You are not here for the reward. You are here because <em>Dren is still out there.</em> You can feel it — the same instinct that's kept you alive in the dark for years. He's alive. Something is keeping him that way on purpose.</p>
+        <p>What it wants in return, you don't know yet.</p>
+      </div>
+      <div class="secret-prompt">
+        Ask yourself —
+        <span>When you find out what's down there, will you be able to leave without Dren — even if he asks you to?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SABLE DAWNRIDGE ══════════════ -->
+  <div class="note">
+    <div class="note-outside">
+      <div class="fold-label">For the Eyes of —</div>
+      <div class="char-name-label"><span class="note-sigil">🔔</span>Sable Dawnridge</div>
+      <div class="char-class-label">Vengeance Paladin · Tiefling</div>
+      <div class="fold-indicator">— fold here · read alone —</div>
+    </div>
+    <div class="note-inside">
+      <div class="secret-header">☩ Your Secret ☩</div>
+      <hr class="secret-rule">
+      <div class="secret-text-card">
+        <p>You've had the same dream for six months. You're underwater. It's dark and very cold. Something is ringing — enormous, close, like you're inside the bell itself. And a voice says the same thing every time, low and deliberate:</p>
+        <p><em>"Bring it back."</em></p>
+        <p>Tucked in the lining of your pack is a small piece of cast iron — old, corroded, curved. You found it on a road three towns back with no memory of picking it up. A blacksmith told you it was bell metal. Very old bell metal.</p>
+        <p>You don't know what it is. But the closer you get to Mirefall, the warmer it gets.</p>
+      </div>
+      <div class="secret-prompt">
+        Ask yourself —
+        <span>The voice said bring it back. What happens when you do — and do you have a choice?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ THESSALY VORNE ══════════════ -->
+  <div class="note">
+    <div class="note-outside">
+      <div class="fold-label">For the Eyes of —</div>
+      <div class="char-name-label"><span class="note-sigil">💀</span>Thessaly Vorne</div>
+      <div class="char-class-label">Necromancer Wizard · Half-Elf</div>
+      <div class="fold-indicator">— fold here · read alone —</div>
+    </div>
+    <div class="note-inside">
+      <div class="secret-header">☩ Your Secret ☩</div>
+      <hr class="secret-rule">
+      <div class="secret-text-card">
+        <p>The Vorne family was one of six families involved in the land dispute with Father Voss the year of the flood. You didn't know this — your family never spoke of Mirefall. But your research into your own genealogy brought you here, and what you found in the old records made you feel sick.</p>
+        <p>Your ancestor signed the dispute paperwork. Withdrew from it last-minute. Then — according to a single faded line in a parish record you found — <em>tried to send warning to the chapel and was stopped by the other families.</em></p>
+        <p>Your ancestor tried to save him. Was prevented. And has never been part of the story anyone tells.</p>
+        <p>You are not sure if you came here to exonerate your family or to finally understand why the dead have always spoken so easily to you.</p>
+      </div>
+      <div class="secret-prompt">
+        Ask yourself —
+        <span>If Father Voss knows your name — your family name — what do you hope he says?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ASH ══════════════ -->
+  <div class="note">
+    <div class="note-outside">
+      <div class="fold-label">For the Eyes of —</div>
+      <div class="char-name-label"><span class="note-sigil">👻</span>Ash</div>
+      <div class="char-class-label">Phantom Rogue · Halfling</div>
+      <div class="fold-indicator">— fold here · read alone —</div>
+    </div>
+    <div class="note-inside">
+      <div class="secret-header">☩ Your Secret ☩</div>
+      <hr class="secret-rule">
+      <div class="secret-text-card">
+        <p>You don't remember anything before six years ago. You woke up on a riverbank with no name, no past, and no explanation. You named yourself Ash because it felt right — like something that used to be something else.</p>
+        <p>You've always been able to hear things others can't. Not voices exactly. More like the echo of feelings that got left somewhere. Grief. Guilt. The specific weight of something unfinished.</p>
+        <p>The closer you get to Mirefall, the louder it gets. And last night you dreamed of standing in cold water up to your chest, ringing a bell you couldn't stop ringing, watching people on a hillside watch you drown.</p>
+        <p><em>You don't know whose memory that is.</em></p>
+      </div>
+      <div class="secret-prompt">
+        Ask yourself —
+        <span>What if you didn't just survive something at that river? What if part of you didn't survive at all?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ BROTHER MAEL ══════════════ -->
+  <div class="note">
+    <div class="note-outside">
+      <div class="fold-label">For the Eyes of —</div>
+      <div class="char-name-label"><span class="note-sigil">✉</span>Brother Mael</div>
+      <div class="char-class-label">Shadow Monk · Elf</div>
+      <div class="fold-indicator">— fold here · read alone —</div>
+    </div>
+    <div class="note-inside">
+      <div class="secret-header">☩ Your Secret ☩</div>
+      <hr class="secret-rule">
+      <div class="secret-text-card">
+        <p>Your abbot gave you a sealed letter and told you to deliver it to Father Aldric Voss at Mirefall Lake. You were told not to open it. You were told not to ask questions. You were told this was a matter of great spiritual importance.</p>
+        <p>You have since learned that Father Voss drowned a century ago.</p>
+        <p>The letter is still sealed. You have not opened it. But you've held it enough times to notice it has <em>no weight.</em> Paper and wax should have weight. This has none. And sometimes, in the deepest part of your meditation, you think you can hear something moving inside it.</p>
+        <p>You are beginning to suspect your monastery has been sending monks to this lake for a very long time. None of the ones before you came back.</p>
+      </div>
+      <div class="secret-prompt">
+        Ask yourself —
+        <span>When the time comes — and it will — do you deliver the letter? Do you open it? Or do you let it sink?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ISOLDE MOURNE ══════════════ -->
+  <div class="note">
+    <div class="note-outside">
+      <div class="fold-label">For the Eyes of —</div>
+      <div class="char-name-label"><span class="note-sigil">🎶</span>Isolde Mourne</div>
+      <div class="char-class-label">College of Spirits Bard · Human</div>
+      <div class="fold-indicator">— fold here · read alone —</div>
+    </div>
+    <div class="note-inside">
+      <div class="secret-header">☩ Your Secret ☩</div>
+      <hr class="secret-rule">
+      <div class="secret-text-card">
+        <p>Your sister Lira went to Mirefall two years ago chasing a rumor about a haunted lake and never came home. The official story is that she drowned. You don't believe it — Lira was a stronger swimmer than anyone you've ever known, and she was careful, and she knew what she was doing.</p>
+        <p>What you haven't told anyone: three months after she disappeared, you woke in the night to the sound of her voice. Just two words. <em>He's waiting.</em></p>
+        <p>You've been a collector of ghost stories your whole life. You have spoken to dozens of the dead through your music. But you have never been able to reach Lira — not once, not even a whisper.</p>
+        <p>Something at that lake is keeping her from you. You intend to find out what.</p>
+      </div>
+      <div class="secret-prompt">
+        Ask yourself —
+        <span>If you reach Lira and she tells you to leave — that she chose to stay — can you accept that?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ CALDER THORNE ══════════════ -->
+  <div class="note">
+    <div class="note-outside">
+      <div class="fold-label">For the Eyes of —</div>
+      <div class="char-name-label"><span class="note-sigil">⚒</span>Calder Thorne</div>
+      <div class="char-class-label">Rune Knight Fighter · Dwarf</div>
+      <div class="fold-indicator">— fold here · read alone —</div>
+    </div>
+    <div class="note-inside">
+      <div class="secret-header">☩ Your Secret ☩</div>
+      <hr class="secret-rule">
+      <div class="secret-text-card">
+        <p>Three weeks ago you woke up with marks on your skin. Both forearms, shoulder to wrist — runes you don't recognize, in no script you've ever studied, etched as if they'd always been there. They don't hurt. They don't fade. And when you are near water, they <em>glow faintly blue.</em></p>
+        <p>You haven't told anyone. You've been covering them with your armor.</p>
+        <p>A scholar you consulted in secret recognized one symbol — a binding ward, very old, used in drowned-god rituals to mark someone as a vessel. She didn't know for what. She suggested, carefully, that you not go near any large bodies of water.</p>
+        <p>You came to Mirefall anyway because you need answers more than you need safety.</p>
+      </div>
+      <div class="secret-prompt">
+        Ask yourself —
+        <span>The runes appeared the same night the bell started ringing. What does Father Voss want with you specifically?</span>
+      </div>
+    </div>
+  </div>
+
+    </div><!-- /notes-grid -->
+  </div><!-- /secrets-inner -->
+</div><!-- /section-secrets -->
+
+<!-- ══ JAVASCRIPT ══ -->
+<script>
+var sections = ['home','docs','sheets','secrets'];
+
+function switchSection(id) {
+  sections.forEach(function(s) {
+    var el = document.getElementById('section-' + s);
+    if (el) el.classList.toggle('active', s === id);
+  });
+  document.querySelectorAll('.nav-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.getAttribute('data-section') === id);
+  });
+  window.scrollTo(0, 0);
+}
+
+// Nav buttons
+document.querySelectorAll('.nav-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    switchSection(btn.getAttribute('data-section'));
+  });
+});
+
+// Landing cards handled by onclick
+
+// Doc tabs
+document.querySelectorAll('.doc-tab').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var idx = parseInt(btn.getAttribute('data-doc'));
+    document.querySelectorAll('.doc-panel').forEach(function(p, i) {
+      p.style.display = i === idx ? 'block' : 'none';
+      p.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.doc-tab').forEach(function(b) {
+      b.classList.toggle('active', b === btn);
+    });
+    window.scrollTo(0,0);
+  });
+});
+
+// Character tabs
+document.querySelectorAll('.char-tab').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var idx = parseInt(btn.getAttribute('data-char'));
+    document.querySelectorAll('.sheet-panel').forEach(function(p, i) {
+      p.style.display = i === idx ? 'block' : 'none';
+      p.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.char-tab').forEach(function(b) {
+      b.classList.toggle('active', b === btn);
+    });
+    window.scrollTo(0,0);
+  });
+});
+
+// Init panels
+document.querySelectorAll('.doc-panel').forEach(function(p, i) {
+  p.style.display = i === 0 ? 'block' : 'none';
+});
+document.querySelectorAll('.sheet-panel').forEach(function(p, i) {
+  p.style.display = i === 0 ? 'block' : 'none';
+});
+</script>
+
+
+
+</body></html>
