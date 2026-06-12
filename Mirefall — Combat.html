@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)file:///C:/Users/jeepc/Downloads/combat.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mirefall — Combat</title>
+<link href="./Mirefall — Combat_files/css2" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0e0b08;
+  --card: #1a1208;
+  --border: #2a1a08;
+  --gold: #c8a060;
+  --red: #8b1a00;
+  --parch: #f2e8d0;
+  --ink: #1a0e05;
+}
+body { background: var(--bg); color: var(--parch); font-family: 'Crimson Pro', serif; min-height: 100vh; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: #080604; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 12px; gap: 2px; overflow-x: auto;
+}
+.nav-title { font-family: 'UnifrakturMaguntia', cursive; color: var(--gold); font-size: 1rem; padding: 12px 12px 12px 0; border-right: 1px solid var(--border); margin-right: 6px; white-space: nowrap; flex-shrink: 0; }
+.nav-btn { background: none; border: none; color: #7a5535; font-family: 'Crimson Pro', serif; font-size: 0.8rem; padding: 12px 10px; cursor: pointer; white-space: nowrap; transition: color 0.15s; }
+.nav-btn:hover { color: var(--gold); }
+.nav-btn.active { color: #e8c070; border-bottom: 2px solid var(--gold); }
+
+/* MAIN */
+.main { padding: 58px 12px 60px; max-width: 900px; margin: 0 auto; }
+
+/* SECTION */
+.section { display: none; }
+.section.active { display: block; }
+
+/* ENCOUNTER HEADER */
+.enc-header {
+  text-align: center; padding: 24px 16px 16px;
+}
+.enc-title { font-family: 'UnifrakturMaguntia', cursive; font-size: 2rem; color: var(--gold); margin-bottom: 4px; }
+.enc-sub { font-family: 'IM Fell English SC', serif; font-size: 0.75rem; color: #6a5030; letter-spacing: 0.2em; margin-bottom: 16px; }
+.enc-flavor { font-family: 'IM Fell English', serif; font-style: italic; font-size: 0.95rem; color: #8a7050; line-height: 1.7; max-width: 600px; margin: 0 auto 20px; }
+
+/* STAT BLOCK */
+.stat-block {
+  background: var(--card); border: 1px solid var(--border); margin-bottom: 16px; overflow: hidden;
+}
+.sb-header { background: var(--red); padding: 12px 18px; }
+.sb-name { font-family: 'IM Fell English', serif; font-size: 1.3rem; color: var(--parch); }
+.sb-type { font-family: 'Crimson Pro', serif; font-style: italic; font-size: 0.82rem; color: rgba(242,232,208,0.7); margin-top: 2px; }
+.sb-body { padding: 14px 18px; }
+
+.sb-vitals { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.vital { background: rgba(255,255,255,0.04); border: 1px solid var(--border); padding: 6px 12px; text-align: center; min-width: 80px; }
+.vital-label { font-size: 0.58rem; letter-spacing: 0.12em; color: #6a5030; display: block; margin-bottom: 2px; font-family: 'Crimson Pro', serif; font-weight: 600; }
+.vital-val { font-family: 'IM Fell English', serif; font-size: 1.1rem; color: var(--gold); }
+
+.sb-rule { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+
+.sb-traits { margin-bottom: 10px; }
+.trait-line { font-family: 'Crimson Pro', serif; font-size: 0.88rem; line-height: 1.55; margin-bottom: 6px; color: #c8b898; }
+.trait-line strong { color: var(--parch); font-weight: 600; }
+
+.sb-actions { }
+.action-head { font-family: 'IM Fell English SC', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--red); border-bottom: 1px solid #3a1000; padding-bottom: 4px; margin-bottom: 8px; }
+.action { font-family: 'Crimson Pro', serif; font-size: 0.88rem; line-height: 1.55; margin-bottom: 8px; color: #c8b898; }
+.action strong { color: var(--parch); }
+.action em { font-style: italic; color: #a09070; font-size: 0.82rem; }
+
+/* INITIATIVE TRACKER */
+.tracker { background: var(--card); border: 1px solid var(--border); padding: 16px; margin-bottom: 16px; }
+.tracker-title { font-family: 'IM Fell English SC', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 12px; }
+.init-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border: 1px solid transparent; margin-bottom: 6px; cursor: pointer; transition: background 0.1s;
+}
+.init-row:hover { background: rgba(255,255,255,0.03); }
+.init-row.current { background: rgba(200,160,96,0.12); border-color: #5a3a14; }
+.init-row.dead { opacity: 0.35; }
+.init-num { font-family: 'IM Fell English', serif; font-size: 1.2rem; color: var(--gold); min-width: 32px; text-align: center; }
+.init-name { font-family: 'Crimson Pro', serif; font-size: 0.95rem; color: var(--parch); flex: 1; }
+.init-hp { font-family: 'Crimson Pro', serif; font-size: 0.82rem; color: #8a7050; }
+.init-controls { display: flex; gap: 6px; }
+.btn-sm {
+  background: none; border: 1px solid var(--border); color: #7a5535;
+  font-size: 0.75rem; padding: 3px 8px; cursor: pointer; font-family: 'Crimson Pro', serif;
+  transition: all 0.15s;
+}
+.btn-sm:hover { border-color: var(--gold); color: var(--gold); }
+.btn-sm.danger:hover { border-color: var(--red); color: #c04020; }
+
+.tracker-controls { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.btn { background: none; border: 1px solid var(--border); color: #8a7050; font-family: 'Crimson Pro', serif; font-size: 0.82rem; padding: 7px 16px; cursor: pointer; transition: all 0.15s; }
+.btn:hover { border-color: var(--gold); color: var(--gold); }
+.btn.primary { border-color: #5a3a14; color: var(--gold); }
+.btn.primary:hover { background: rgba(200,160,96,0.1); }
+
+/* HP INPUT */
+.hp-input-row { display: flex; gap: 6px; margin-top: 10px; align-items: center; flex-wrap: wrap; }
+.hp-input-row input {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--parch);
+  font-family: 'Crimson Pro', serif; font-size: 0.9rem; padding: 5px 10px; width: 70px;
+}
+.hp-input-row select {
+  background: #111; border: 1px solid var(--border); color: var(--parch);
+  font-family: 'Crimson Pro', serif; font-size: 0.85rem; padding: 5px 8px;
+}
+.hp-label { font-size: 0.8rem; color: #6a5030; font-family: 'Crimson Pro', serif; }
+
+/* CONDITION TAGS */
+.conditions { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.cond-tag { font-size: 0.68rem; padding: 2px 7px; border: 1px solid #5a3020; color: #c04020; font-family: 'Crimson Pro', serif; cursor: pointer; }
+.cond-tag:hover { background: rgba(200,60,20,0.15); }
+
+/* DM NOTES */
+.dm-box { background: rgba(0,0,0,0.3); border-left: 3px solid var(--gold); padding: 12px 16px; margin-bottom: 16px; }
+.dm-box-label { font-family: 'IM Fell English SC', serif; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 6px; }
+.dm-box p { font-family: 'IM Fell English', serif; font-style: italic; font-size: 0.85rem; color: #9a8060; line-height: 1.6; margin-bottom: 6px; }
+.dm-box p:last-child { margin-bottom: 0; }
+.dm-box strong { color: #c8a060; font-style: normal; }
+
+/* ROUND COUNTER */
+.round-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.round-display { font-family: 'IM Fell English', serif; font-size: 1.4rem; color: var(--gold); }
+.round-label { font-family: 'Crimson Pro', serif; font-size: 0.75rem; color: #6a5030; letter-spacing: 0.1em; }
+
+/* RESPONSIVE */
+@media (max-width: 500px) {
+  .sb-vitals { gap: 4px; }
+  .vital { min-width: 60px; padding: 5px 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-title">☩ Mirefall</div>
+  <button class="nav-btn active" data-sec="enc1">① Ghouls</button>
+  <button class="nav-btn" data-sec="enc2">② Wisps</button>
+  <button class="nav-btn" data-sec="enc3">③ Voss</button>
+</nav>
+
+<div class="main">
+
+<!-- ════════════════════════════════
+     ENCOUNTER 1 — LAKE GHOULS
+════════════════════════════════ -->
+<div class="section active" id="enc1">
+  <div class="enc-header">
+    <div class="enc-title">The Drowned Dead</div>
+    <div class="enc-sub">Encounter 1 · Shoreline / Dock · Act 1</div>
+    <div class="enc-flavor">"Something breaks the surface. Not a fish. The water around the dock goes still — and then the hands come up."</div>
+  </div>
+
+  <div class="dm-box">
+    <div class="dm-box-label">DM Notes</div>
+    <p><strong>Setup:</strong> 3 Lake Ghouls + 1 Lake Ghast (leader). Ghouls rise from the water's edge as the party investigates the dock or attempts to launch a boat. Start with 2 ghouls, have the ghast and 3rd ghoul emerge on round 2.</p>
+    <p><strong>Tactics:</strong> Ghouls rush and grapple (Paralysis on hit). Ghast hangs back, uses Stench to debuff, then moves in. If 2+ players are paralyzed, the remaining enemies drag one toward the water. Retreat into the lake if below 10 HP.</p>
+    <p><strong>Tone:</strong> These were the missing fishermen's friends. One ghoul is wearing Corvin's jacket. Let the players notice.</p>
+  </div>
+
+  <div class="stat-block">
+    <div class="sb-header">
+      <div class="sb-name">Lake Ghoul</div>
+      <div class="sb-type">Medium Undead · CR 1 · XP 200 each</div>
+    </div>
+    <div class="sb-body">
+      <div class="sb-vitals">
+        <div class="vital"><span class="vital-label">AC</span><span class="vital-val">12</span></div>
+        <div class="vital"><span class="vital-label">HP</span><span class="vital-val">22</span></div>
+        <div class="vital"><span class="vital-label">SPEED</span><span class="vital-val">30/swim 30</span></div>
+        <div class="vital"><span class="vital-label">STR</span><span class="vital-val">+2</span></div>
+        <div class="vital"><span class="vital-label">DEX</span><span class="vital-val">+2</span></div>
+        <div class="vital"><span class="vital-label">CON</span><span class="vital-val">+0</span></div>
+      </div>
+      <hr class="sb-rule">
+      <div class="sb-traits">
+        <div class="trait-line"><strong>Darkvision</strong> 60 ft. <strong>Undead Fortitude</strong> (removed — these are waterlogged, fragile).</div>
+      </div>
+      <div class="sb-actions">
+        <div class="action-head">Actions</div>
+        <div class="action"><strong>Multiattack.</strong> Two attacks: one Bite, one Claws.</div>
+        <div class="action"><strong>Bite.</strong> <em>+2 to hit, 5 ft., one target.</em> 2d6+2 piercing. If target is paralyzed, deals max damage.</div>
+        <div class="action"><strong>Claws.</strong> <em>+4 to hit, 5 ft., one target.</em> 2d4+2 slashing. Target must succeed DC 10 CON save or be <strong>Paralyzed</strong> until end of their next turn.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-block">
+    <div class="sb-header">
+      <div class="sb-name">Lake Ghast</div>
+      <div class="sb-type">Medium Undead · CR 2 · XP 450 · Pack Leader</div>
+    </div>
+    <div class="sb-body">
+      <div class="sb-vitals">
+        <div class="vital"><span class="vital-label">AC</span><span class="vital-val">13</span></div>
+        <div class="vital"><span class="vital-label">HP</span><span class="vital-val">36</span></div>
+        <div class="vital"><span class="vital-label">SPEED</span><span class="vital-val">30/swim 30</span></div>
+        <div class="vital"><span class="vital-label">STR</span><span class="vital-val">+3</span></div>
+        <div class="vital"><span class="vital-label">DEX</span><span class="vital-val">+2</span></div>
+        <div class="vital"><span class="vital-label">CHA SAVE</span><span class="vital-val">+5</span></div>
+      </div>
+      <hr class="sb-rule">
+      <div class="sb-traits">
+        <div class="trait-line"><strong>Stench.</strong> Any creature that starts its turn within 5 ft. must succeed DC 10 CON save or be Poisoned until start of next turn. On success, immune for 24 hrs.</div>
+        <div class="trait-line"><strong>Turning Defiance.</strong> Ghast and all ghouls within 30 ft. have advantage on saves against Turn Undead.</div>
+      </div>
+      <div class="sb-actions">
+        <div class="action-head">Actions</div>
+        <div class="action"><strong>Multiattack.</strong> One Bite + one Claws.</div>
+        <div class="action"><strong>Bite.</strong> <em>+3 to hit.</em> 2d8+3 piercing. Paralyzed targets take max damage.</div>
+        <div class="action"><strong>Claws.</strong> <em>+5 to hit.</em> 2d6+3 slashing. DC 10 CON save or Paralyzed until end of next turn. Elves immune.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tracker" id="tracker1">
+    <div class="tracker-title">Initiative Tracker — Encounter 1</div>
+    <div class="round-bar">
+      <span class="round-label">ROUND</span>
+      <span class="round-display" id="round1">1</span>
+      <button class="btn primary" onclick="nextRound(&#39;round1&#39;,&#39;tracker1&#39;)">Next Round ›</button>
+      <button class="btn" onclick="resetRound(&#39;round1&#39;,&#39;tracker1&#39;)">Reset</button>
+    </div>
+    <div id="rows1">
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">🧙 Party (highest init)</span><span class="init-hp"></span></div>
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">Lake Ghast</span><span class="init-hp">HP: 36</span><div class="init-controls"><button class="btn-sm" onclick="applyHP(this,-5,36)">-5</button><button class="btn-sm" onclick="applyHP(this,-10,36)">-10</button><button class="btn-sm danger" onclick="markDead(this)">☠</button></div></div>
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">Lake Ghoul A</span><span class="init-hp">HP: 22</span><div class="init-controls"><button class="btn-sm" onclick="applyHP(this,-5,22)">-5</button><button class="btn-sm" onclick="applyHP(this,-10,22)">-10</button><button class="btn-sm danger" onclick="markDead(this)">☠</button></div></div>
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">Lake Ghoul B</span><span class="init-hp">HP: 22</span><div class="init-controls"><button class="btn-sm" onclick="applyHP(this,-5,22)">-5</button><button class="btn-sm" onclick="applyHP(this,-10,22)">-10</button><button class="btn-sm danger" onclick="markDead(this)">☠</button></div></div>
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">Lake Ghoul C <em style="font-size:0.75rem;color:#6a5030">(round 2)</em></span><span class="init-hp">HP: 22</span><div class="init-controls"><button class="btn-sm" onclick="applyHP(this,-5,22)">-5</button><button class="btn-sm" onclick="applyHP(this,-10,22)">-10</button><button class="btn-sm danger" onclick="markDead(this)">☠</button></div></div>
+    </div>
+    <div class="hp-input-row">
+      <span class="hp-label">Custom damage:</span>
+      <input type="number" id="dmg1" placeholder="amt" min="0">
+      <select id="target1">
+        <option>Lake Ghast</option>
+        <option>Lake Ghoul A</option>
+        <option>Lake Ghoul B</option>
+        <option>Lake Ghoul C</option>
+      </select>
+      <button class="btn" onclick="customDmg(&#39;dmg1&#39;,&#39;target1&#39;,&#39;rows1&#39;)">Apply</button>
+    </div>
+  </div>
+
+  <div class="dm-box">
+    <div class="dm-box-label">XP &amp; Transitions</div>
+    <p><strong>XP:</strong> 3 Ghouls (600) + 1 Ghast (450) = <strong>1,050 XP total</strong> (~131/player)</p>
+    <p><strong>After combat:</strong> Marta can be found watching from her doorway. She knows what those things were. This is the moment she starts to crack — she'll mention the bell "has been ringing since before my grandmother was born." Push her toward the church log if players press her.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ENCOUNTER 2 — WILL-O-WISPS
+════════════════════════════════ -->
+<div class="section" id="enc2">
+  <div class="enc-header">
+    <div class="enc-title">The Lights on the Water</div>
+    <div class="enc-sub">Encounter 2 · On the Lake / Rowboat · Act 2</div>
+    <div class="enc-flavor">"The fog thickens as you pull away from shore. Then you see them — pale lights beneath the surface, rising slowly, drawn toward the boat."</div>
+  </div>
+
+  <div class="dm-box">
+    <div class="dm-box-label">DM Notes</div>
+    <p><strong>Setup:</strong> 4 Will-o'-Wisps attack while the party is on the water in rowboats. Two rise from below, two drift in from the fog. The party is constrained — anyone knocked unconscious risks going overboard (DC 12 DEX save or fall in).</p>
+    <p><strong>Tactics:</strong> Wisps use Consume Life on downed targets, Incorporeal Movement to pass through the boat, Ephemeral to go invisible and reposition. They avoid melee, hover just out of reach. They're not trying to kill — they're herding the party toward the chapel site.</p>
+    <p><strong>Twist:</strong> If a player uses a light source (torch, spell), the wisps recoil for one round (disadvantage on attacks). If players figure out the wisps are guiding them, not attacking, they can attempt a DC 13 Insight or Arcana check to realize they should follow the lights. Reward this — it gets them to the chapel faster.</p>
+  </div>
+
+  <div class="stat-block">
+    <div class="sb-header">
+      <div class="sb-name">Will-o'-Wisp</div>
+      <div class="sb-type">Tiny Undead · CR 2 · XP 450 each</div>
+    </div>
+    <div class="sb-body">
+      <div class="sb-vitals">
+        <div class="vital"><span class="vital-label">AC</span><span class="vital-val">19</span></div>
+        <div class="vital"><span class="vital-label">HP</span><span class="vital-val">22</span></div>
+        <div class="vital"><span class="vital-label">SPEED</span><span class="vital-val">fly 50</span></div>
+        <div class="vital"><span class="vital-label">DEX</span><span class="vital-val">+9</span></div>
+        <div class="vital"><span class="vital-label">INT</span><span class="vital-val">+2</span></div>
+        <div class="vital"><span class="vital-label">WIS</span><span class="vital-val">+2</span></div>
+      </div>
+      <hr class="sb-rule">
+      <div class="sb-traits">
+        <div class="trait-line"><strong>Resistances:</strong> Acid, Fire, Lightning, Thunder; Bludgeoning/Piercing/Slashing from nonmagical attacks.</div>
+        <div class="trait-line"><strong>Immunities:</strong> Cold, Necrotic, Poison. Exhaustion, Grappled, Paralyzed, Poisoned, Prone, Restrained, Unconscious.</div>
+        <div class="trait-line"><strong>Ephemeral.</strong> Can't wear or carry anything.</div>
+        <div class="trait-line"><strong>Incorporeal Movement.</strong> Can move through creatures and objects as difficult terrain. Takes 5 force damage if it ends turn inside an object.</div>
+        <div class="trait-line"><strong>Variable Illumination.</strong> Sheds bright light in 5–20 ft. radius (bonus action to change). Can extinguish light entirely (Invisible).</div>
+      </div>
+      <div class="sb-actions">
+        <div class="action-head">Actions</div>
+        <div class="action"><strong>Shock.</strong> <em>+4 to hit, 5 ft., one creature.</em> 2d8 lightning damage.</div>
+        <div class="action"><strong>Consume Life.</strong> <em>Target within 5 ft. must have 0 HP.</em> Target makes DC 10 CON save. Fail: 10 (3d6) necrotic, wisp regains same HP. If this kills target, they die.</div>
+        <div class="action"><strong>Invisibility (bonus action).</strong> Becomes invisible until attacks or uses Consume Life, or until concentration ends.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tracker" id="tracker2">
+    <div class="tracker-title">Initiative Tracker — Encounter 2</div>
+    <div class="round-bar">
+      <span class="round-label">ROUND</span>
+      <span class="round-display" id="round2">1</span>
+      <button class="btn primary" onclick="nextRound(&#39;round2&#39;,&#39;tracker2&#39;)">Next Round ›</button>
+      <button class="btn" onclick="resetRound(&#39;round2&#39;,&#39;tracker2&#39;)">Reset</button>
+    </div>
+    <div id="rows2">
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">🧙 Party</span><span class="init-hp"></span></div>
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">Wisp A</span><span class="init-hp">HP: 22</span><div class="init-controls"><button class="btn-sm" onclick="applyHP(this,-5,22)">-5</button><button class="btn-sm" onclick="applyHP(this,-10,22)">-10</button><button class="btn-sm danger" onclick="markDead(this)">☠</button></div></div>
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">Wisp B</span><span class="init-hp">HP: 22</span><div class="init-controls"><button class="btn-sm" onclick="applyHP(this,-5,22)">-5</button><button class="btn-sm" onclick="applyHP(this,-10,22)">-10</button><button class="btn-sm danger" onclick="markDead(this)">☠</button></div></div>
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">Wisp C <em style="font-size:0.75rem;color:#6a5030">(from fog)</em></span><span class="init-hp">HP: 22</span><div class="init-controls"><button class="btn-sm" onclick="applyHP(this,-5,22)">-5</button><button class="btn-sm" onclick="applyHP(this,-10,22)">-10</button><button class="btn-sm danger" onclick="markDead(this)">☠</button></div></div>
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">Wisp D <em style="font-size:0.75rem;color:#6a5030">(from fog)</em></span><span class="init-hp">HP: 22</span><div class="init-controls"><button class="btn-sm" onclick="applyHP(this,-5,22)">-5</button><button class="btn-sm" onclick="applyHP(this,-10,22)">-10</button><button class="btn-sm danger" onclick="markDead(this)">☠</button></div></div>
+    </div>
+    <div class="hp-input-row">
+      <span class="hp-label">Custom damage:</span>
+      <input type="number" id="dmg2" placeholder="amt" min="0">
+      <select id="target2">
+        <option>Wisp A</option><option>Wisp B</option><option>Wisp C</option><option>Wisp D</option>
+      </select>
+      <button class="btn" onclick="customDmg(&#39;dmg2&#39;,&#39;target2&#39;,&#39;rows2&#39;)">Apply</button>
+    </div>
+  </div>
+
+  <div class="dm-box">
+    <div class="dm-box-label">XP &amp; Transitions</div>
+    <p><strong>XP:</strong> 4 Wisps = <strong>1,800 XP total</strong> (~225/player). Reduce if players solve it via roleplay.</p>
+    <p><strong>After combat:</strong> The wisps, if destroyed, dissipate into cold fog. The spot where they dissolved marks the submerged chapel entrance. Party can dive down (Athletics DC 13) or find the flooded stairs nearby. This is the transition to Act 2 and Father Voss.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ENCOUNTER 3 — FATHER VOSS
+════════════════════════════════ -->
+<div class="section" id="enc3">
+  <div class="enc-header">
+    <div class="enc-title">Father Aldric Voss</div>
+    <div class="enc-sub">Encounter 3 · Submerged Chapel · Act 2 Boss · CR 6</div>
+    <div class="enc-flavor">"He stands at the bell rope. Still ringing, still ringing, even now. He turns. His eyes are the color of deep water. He says: 'You came. I have been waiting for someone to come.'"</div>
+  </div>
+
+  <div class="dm-box">
+    <div class="dm-box-label">DM Notes — Read Before Running</div>
+    <p><strong>This fight should feel wrong.</strong> Voss doesn't attack first. He speaks. He asks why they've come. Give the party at least one full round to attempt dialogue before he becomes hostile — and he only becomes hostile if they attack or refuse to hear him.</p>
+    <p><strong>Peaceful resolution:</strong> If the party has Marta's letter, the church log, or Marta herself (if she followed them), Voss can be reasoned with. DC 15 Persuasion with evidence = he stops fighting and asks to be told the truth. He needs to hear that someone knows what happened. Once he knows — he rings the bell one final time and dissolves.</p>
+    <p><strong>Combat trigger:</strong> If players attack or fail three consecutive dialogue attempts, Voss enters full combat mode. He's not angry — he's grieving. Have him say "Then I will ring until someone hears" as he attacks.</p>
+    <p><strong>Lair:</strong> Submerged chapel, 20 ft. underwater. Dim light (bioluminescent algae). Difficult terrain (water resistance to movement unless swimming). Bell platform is 10 ft. above the main floor — Voss starts there.</p>
+  </div>
+
+  <div class="stat-block">
+    <div class="sb-header">
+      <div class="sb-name">Father Aldric Voss, the Drowned Revenant</div>
+      <div class="sb-type">Medium Undead · CR 6 · XP 2,300 · Legendary</div>
+    </div>
+    <div class="sb-body">
+      <div class="sb-vitals">
+        <div class="vital"><span class="vital-label">AC</span><span class="vital-val">15</span></div>
+        <div class="vital"><span class="vital-label">HP</span><span class="vital-val">136</span></div>
+        <div class="vital"><span class="vital-label">SPEED</span><span class="vital-val">30/swim 30</span></div>
+        <div class="vital"><span class="vital-label">STR</span><span class="vital-val">+4</span></div>
+        <div class="vital"><span class="vital-label">CON</span><span class="vital-val">+3</span></div>
+        <div class="vital"><span class="vital-label">WIS</span><span class="vital-val">+5</span></div>
+        <div class="vital"><span class="vital-label">CHA</span><span class="vital-val">+4</span></div>
+      </div>
+      <hr class="sb-rule">
+      <div class="sb-traits">
+        <div class="trait-line"><strong>Regeneration.</strong> Regains 10 HP at start of turn if he has at least 1 HP. If he takes fire or radiant damage, no regen next turn.</div>
+        <div class="trait-line"><strong>Undead Nature.</strong> Doesn't require air, food, drink, or sleep. Immune to poison and disease. Immune to Frightened, Exhaustion, Poison.</div>
+        <div class="trait-line"><strong>Legendary Resistance (2/day).</strong> If he fails a save, can choose to succeed instead.</div>
+        <div class="trait-line"><strong>Drowned Aura.</strong> Each creature that starts its turn within 10 ft. must succeed DC 13 STR save or be pulled 5 ft. toward Voss.</div>
+        <div class="trait-line"><strong>The Bell's Call.</strong> While in the chapel, the bell rings at initiative count 20. Each creature within 30 ft. makes DC 13 WIS save or is Frightened of Voss until start of next turn.</div>
+      </div>
+      <div class="sb-actions">
+        <div class="action-head">Actions</div>
+        <div class="action"><strong>Multiattack.</strong> Two Drowning Grasp attacks, or one Drowning Grasp + one Bell Toll.</div>
+        <div class="action"><strong>Drowning Grasp.</strong> <em>+7 to hit, 5 ft., one target.</em> 2d8+4 bludgeoning + target makes DC 14 CON save or is Incapacitated until end of next turn (lungs fill with water).</div>
+        <div class="action"><strong>Bell Toll (Recharge 5–6).</strong> Voss rings the great bell. Each creature within 30 ft. makes DC 15 CON save. Fail: 4d10 thunder + Stunned until end of next turn. Half damage on success, not Stunned.</div>
+        <div class="action"><strong>Condemn (1/day).</strong> <em>One creature Voss can see within 30 ft.</em> Target makes DC 15 CHA save. Fail: cursed. While cursed, Voss always knows target's location; target has disadvantage on saves vs. Voss. Curse ends when Voss is destroyed or willingly lifts it.</div>
+      </div>
+      <div class="sb-actions" style="margin-top:10px;">
+        <div class="action-head">Legendary Actions (2/round, at end of another creature's turn)</div>
+        <div class="action"><strong>Toll (1 action).</strong> The bell rings. One creature within 30 ft. makes DC 12 WIS save or is Frightened until end of their next turn.</div>
+        <div class="action"><strong>Grasp (1 action).</strong> Makes one Drowning Grasp attack.</div>
+        <div class="action"><strong>The Flood (2 actions).</strong> Water surges from the chapel walls. Each creature in the chapel makes DC 14 STR save or is knocked Prone and pushed 10 ft. away from Voss.</div>
+      </div>
+      <div class="sb-actions" style="margin-top:10px;">
+        <div class="action-head">Dialogue Options (before combat)</div>
+        <div class="action"><strong>"Why have you come to my chapel?"</strong> — Wants acknowledgment, not attack. Correct answer: truth.</div>
+        <div class="action"><strong>"Do you know what they did?"</strong> — DC 12 Insight: he's not asking rhetorically. He needs someone to say yes.</div>
+        <div class="action"><strong>Show Marta's letter:</strong> Automatic success. He goes silent. Asks to read it himself.</div>
+        <div class="action"><strong>DC 15 Persuasion + evidence:</strong> He stops. Rings the bell one final time. Dissolves peacefully. Party hears distant church bells fading.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tracker" id="tracker3">
+    <div class="tracker-title">Initiative Tracker — Encounter 3</div>
+    <div class="round-bar">
+      <span class="round-label">ROUND</span>
+      <span class="round-display" id="round3">1</span>
+      <button class="btn primary" onclick="nextRound(&#39;round3&#39;,&#39;tracker3&#39;)">Next Round ›</button>
+      <button class="btn" onclick="resetRound(&#39;round3&#39;,&#39;tracker3&#39;)">Reset</button>
+    </div>
+    <div id="rows3">
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">20</span><span class="init-name">🔔 Bell rings — DC 13 WIS save (Frightened)</span><span class="init-hp" style="color:#c04020">AUTO</span></div>
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">🧙 Party</span><span class="init-hp"></span></div>
+      <div class="init-row" onclick="toggleCurrent(this)"><span class="init-num">—</span><span class="init-name">Father Voss</span><span class="init-hp">HP: 136 | Regen: 10/turn</span><div class="init-controls"><button class="btn-sm" onclick="applyHP(this,-10,136)">-10</button><button class="btn-sm" onclick="applyHP(this,-20,136)">-20</button><button class="btn-sm danger" onclick="markDead(this)">☠</button></div></div>
+    </div>
+    <div class="hp-input-row">
+      <span class="hp-label">Damage to Voss:</span>
+      <input type="number" id="dmg3" placeholder="amt" min="0">
+      <button class="btn" onclick="customVoss(&#39;dmg3&#39;)">Apply</button>
+      <button class="btn" style="color:#c8a060;border-color:#5a3a14" onclick="regenVoss()">+10 Regen</button>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="dm-box-label" style="font-size:0.65rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:6px;">RECHARGE TRACKER</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn" id="bellToll" onclick="toggleRecharge(&#39;bellToll&#39;)">🔔 Bell Toll — AVAILABLE</button>
+        <button class="btn" id="condemn" onclick="toggleRecharge(&#39;condemn&#39;)">⚠ Condemn — AVAILABLE</button>
+        <button class="btn" id="legRes" onclick="toggleRecharge(&#39;legRes&#39;)">🛡 Leg. Resistance — 2 left</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dm-box">
+    <div class="dm-box-label">XP, Endings &amp; Aftermath</div>
+    <p><strong>Combat XP:</strong> 2,300 XP (~288/player)</p>
+    <p><strong>Peaceful XP bonus:</strong> +500 XP for peaceful resolution (~63/player)</p>
+    <p><strong>Total session XP:</strong> ~1,050 + 1,800 + 2,300 = <strong>5,150 XP</strong> (~644/player). Enough to push most to Level 5.</p>
+    <p><strong>Ending A — Combat:</strong> Voss is destroyed. The bell goes silent. The chapel begins to slowly flood fully. The fishermen (if rescued) wake from their trance. Marta weeps — she wanted him to rest, not to be destroyed.</p>
+    <p><strong>Ending B — Peaceful:</strong> Voss reads the letter. He looks at the party. "Someone came." He rings the bell — once, clearly, the way it was meant to ring. Then he's gone. The water stills. The fishermen surface on their own. Marta, if present, says: "He rang it right. Finally."</p>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// Section nav
+document.querySelectorAll('.nav-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var sec = btn.getAttribute('data-sec');
+    document.querySelectorAll('.section').forEach(function(s) {
+      s.classList.toggle('active', s.id === sec);
+    });
+    document.querySelectorAll('.nav-btn').forEach(function(b) {
+      b.classList.toggle('active', b === btn);
+    });
+    window.scrollTo(0,0);
+  });
+});
+
+// Current turn highlight
+function toggleCurrent(row) {
+  var wasActive = row.classList.contains('current');
+  row.closest('.tracker').querySelectorAll('.init-row').forEach(function(r) {
+    r.classList.remove('current');
+  });
+  if (!wasActive) row.classList.add('current');
+}
+
+// Round counter
+function nextRound(roundId, trackerId) {
+  var el = document.getElementById(roundId);
+  el.textContent = parseInt(el.textContent) + 1;
+  // advance current highlight
+  var tracker = document.getElementById(trackerId);
+  var rows = Array.from(tracker.querySelectorAll('.init-row:not(.dead)'));
+  var cur = tracker.querySelector('.init-row.current');
+  if (!cur || rows.indexOf(cur) === rows.length - 1) {
+    tracker.querySelectorAll('.init-row').forEach(function(r) { r.classList.remove('current'); });
+    if (rows[0]) rows[0].classList.add('current');
+  } else {
+    cur.classList.remove('current');
+    rows[rows.indexOf(cur) + 1].classList.add('current');
+  }
+}
+
+function resetRound(roundId, trackerId) {
+  document.getElementById(roundId).textContent = '1';
+  document.getElementById(trackerId).querySelectorAll('.init-row').forEach(function(r) {
+    r.classList.remove('current','dead');
+  });
+  // reset HP displays
+  document.getElementById(trackerId).querySelectorAll('.init-hp').forEach(function(hp) {
+    var orig = hp.getAttribute('data-orig');
+    if (orig) hp.textContent = orig;
+  });
+}
+
+// Quick damage buttons
+function applyHP(btn, delta, maxHP) {
+  event.stopPropagation();
+  var row = btn.closest('.init-row');
+  var hpEl = row.querySelector('.init-hp');
+  if (!hpEl.getAttribute('data-orig')) hpEl.setAttribute('data-orig', hpEl.textContent);
+  var match = hpEl.textContent.match(/HP:\s*(-?\d+)/);
+  if (!match) return;
+  var cur = parseInt(match[1]);
+  var next = Math.max(0, cur + delta);
+  hpEl.textContent = hpEl.textContent.replace(/HP:\s*-?\d+/, 'HP: ' + next);
+  if (next === 0) row.classList.add('dead');
+}
+
+function markDead(btn) {
+  event.stopPropagation();
+  var row = btn.closest('.init-row');
+  row.classList.toggle('dead');
+}
+
+// Custom damage
+function customDmg(inputId, selectId, rowsId) {
+  var amt = parseInt(document.getElementById(inputId).value);
+  if (!amt || amt < 0) return;
+  var name = document.getElementById(selectId).value;
+  var rows = document.getElementById(rowsId).querySelectorAll('.init-row');
+  rows.forEach(function(row) {
+    if (row.querySelector('.init-name').textContent.trim().startsWith(name)) {
+      var hpEl = row.querySelector('.init-hp');
+      if (!hpEl) return;
+      if (!hpEl.getAttribute('data-orig')) hpEl.setAttribute('data-orig', hpEl.textContent);
+      var match = hpEl.textContent.match(/HP:\s*(-?\d+)/);
+      if (!match) return;
+      var next = Math.max(0, parseInt(match[1]) - amt);
+      hpEl.textContent = hpEl.textContent.replace(/HP:\s*-?\d+/, 'HP: ' + next);
+      if (next === 0) row.classList.add('dead');
+    }
+  });
+  document.getElementById(inputId).value = '';
+}
+
+// Voss specific
+function customVoss(inputId) {
+  var amt = parseInt(document.getElementById(inputId).value);
+  if (!amt || amt < 0) return;
+  var hpEl = document.querySelector('#rows3 .init-row:last-child .init-hp');
+  if (!hpEl.getAttribute('data-orig')) hpEl.setAttribute('data-orig', hpEl.textContent);
+  var match = hpEl.textContent.match(/HP:\s*(\d+)/);
+  if (!match) return;
+  var next = Math.max(0, parseInt(match[1]) - amt);
+  hpEl.textContent = hpEl.textContent.replace(/HP:\s*\d+/, 'HP: ' + next);
+  if (next === 0) document.querySelector('#rows3 .init-row:last-child').classList.add('dead');
+  document.getElementById(inputId).value = '';
+}
+
+function regenVoss() {
+  var hpEl = document.querySelector('#rows3 .init-row:last-child .init-hp');
+  var match = hpEl.textContent.match(/HP:\s*(\d+)/);
+  if (!match) return;
+  var next = Math.min(136, parseInt(match[1]) + 10);
+  hpEl.textContent = hpEl.textContent.replace(/HP:\s*\d+/, 'HP: ' + next);
+}
+
+var rechargeStates = {};
+function toggleRecharge(id) {
+  var btn = document.getElementById(id);
+  rechargeStates[id] = !rechargeStates[id];
+  if (rechargeStates[id]) {
+    btn.style.color = '#c04020';
+    btn.style.borderColor = '#5a1000';
+    btn.textContent = btn.textContent.replace('AVAILABLE','USED').replace('2 left','1 left — click when gone');
+  } else {
+    btn.style.color = '';
+    btn.style.borderColor = '';
+    btn.textContent = btn.textContent.replace('USED','AVAILABLE').replace('1 left — click when gone','2 left');
+  }
+}
+</script>
+
+
+</body></html>
